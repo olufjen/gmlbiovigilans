@@ -144,10 +144,25 @@
   <bean id="saksbehandlingDAO" class="no.naks.biovigilans.dao.SaksbehandlingDAOImpl">
     	<property name="jdbcTemplate" ref="jdbcTemplatebiovigilans"></property>
   		<property name="selectvigilansMeldingSQL" value="${vigilansmeldingall.select}"></property>
+  		<property name="selectannenMeldingSQL" value="${annenMeldingSelect}"></property>
   		<property name="vigilandsMeldingTableDefs" value="${vigilans.meldeid},${vigilans.datoforhendelse},${vigilans.datooppdaget},${vigilans.donasjonsoverforing},
   	${vigilans.sjekklistesaksbehandling},${vigilans.supplerendeopplysninger},${vigilans.meldingsdato},${vigilans.meldingsnokkel},${vigilans.melderid},
   	${vigilans.kladd},${vigilans.godkjent},${vigilans.endringsdato}"></property>
-  
+  		<property name="annenMeldingTableDefs" value="${annenkomplikasjon.meldeid},${annenkomplikasjon.klassifikasjon},${annenkomplikasjon.klassifikasjonkode},${annenkomplikasjon.delkode},
+  		${annenkomplikasjon.komplikasjonbeskrivelse},${annenkomplikasjon.komplikasjondefinisjon},${annenkomplikasjon.avvikarsak},${annenkomplikasjon.hovedprosess},${annenkomplikasjon.tiltak},
+  		${annenkomplikasjon.kommentar},${annenkomplikasjon.oppdaget},${annenkomplikasjon.pasientopplysninger}"></property>
+  		
+	<property name="selectannenKomplikasjonSQL" value="${annenMeldingSelect}"></property>
+  	<property name="annenkomplikasjonTableDefs" value="${annenkomplikasjon.meldeid},${annenkomplikasjon.klassifikasjon},${annenkomplikasjon.klassifikasjonkode},
+  	${annenkomplikasjon.delkode},${annenkomplikasjon.komplikasjonbeskrivelse},${annenkomplikasjon.komplikasjondefinisjon},${annenkomplikasjon.avvikarsak},
+  	${annenkomplikasjon.hovedprosess},${annenkomplikasjon.tiltak},${annenkomplikasjon.kommentar},${annenkomplikasjon.oppdaget},${annenkomplikasjon.pasientopplysninger}"></property>
+  	<property name="pasientkomplikasjonTableDefs" value="${pasientkomplikasjon.meldeid},${pasientkomplikasjon.transfusjonsid},${pasientkomplikasjon.klassifikasjon},
+  	${pasientkomplikasjon.tidfrapabegynttransfusjontilkomplikasjon},${pasientkomplikasjon.alvorlighetsgrad},${pasientkomplikasjon.kliniskresultat},${pasientkomplikasjon.arsakssammenheng}"></property>
+  	<property name="selectpasientKomplikasjonSQL" value="${pasientkomplikasjon.Select}"></property>
+  	<property name="selectgiverKomplikasjonSQL" value="${giverkomplikasjon.select}"></property>
+  	<property name="giverkomplikasjonTableDefs" value="${giverkomplikasjon.meldeid},${giverkomplikasjon.donasjonsid},${giverkomplikasjon.stedforkomplikasjon},${giverkomplikasjon.tidfrarapporteringtilkomplikasjon},
+  	${giverkomplikasjon.behandlingssted},${giverkomplikasjon.tilleggsopplysninger},${giverkomplikasjon.alvorlighetsgrad},${giverkomplikasjon.kliniskresultat},
+  	${giverkomplikasjon.varighetkomplikasjon},${giverkomplikasjon.datosymptomer}"></property>  
   </bean>
   <bean id="saksbehandlingService"  class="no.naks.biovigilans.service.SaksbehandlingServiceImpl">
   		<property name="saksbehandlingDAO" ref="saksbehandlingDAO"></property>
