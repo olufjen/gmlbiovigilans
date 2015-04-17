@@ -6,7 +6,7 @@ import java.util.Date;
 
 import javax.sql.DataSource;
 
-import no.naks.biovigilans.model.AnnenkomplikasjonImpl;
+import no.naks.biovigilans.model.AbstractVigilansmelding;
 import no.naks.biovigilans.model.Vigilansmelding;
 import no.naks.rammeverk.kildelag.dao.AbstractSelect;
 
@@ -27,7 +27,7 @@ public class VigilansSelect extends AbstractSelect {
 
 	@Override
 	protected Object mapRow(ResultSet rs, int index) throws SQLException {
-		Vigilansmelding melding = new AnnenkomplikasjonImpl();
+		Vigilansmelding melding = new AbstractVigilansmelding();
 		melding.setMeldeid(new Long(rs.getLong(tableDefs[0])));
 		Date datoHendelse = rs.getDate(tableDefs[1]);
 		melding.setDatoforhendelse(datoHendelse);
