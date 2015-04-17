@@ -67,7 +67,7 @@ public class SessionServerResource extends ProsedyreServerResource {
 	protected String datePart = "block";
 	
 	
-	List<String> hvagikkgaltList = new ArrayList<String>();
+	protected List<String> hvagikkgaltList = new ArrayList<String>();
 /*
  * Sessiomn objekter for giver	
  */
