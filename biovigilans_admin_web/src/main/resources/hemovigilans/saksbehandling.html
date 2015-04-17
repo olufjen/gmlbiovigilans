@@ -108,9 +108,9 @@ function formSubmit(){
    
      <div class="form-group" id="tabeller" >
      	<table border=1 >
-  		<tr><th>Detaljer<th>Meldingsnøkkel</th><th>Dato for hendelse</th><th>Meldingsdato</th><th>Status</th>
+  		<tr><th>Detaljer<th>Meldingsnøkkel</th><th>Dato for hendelse</th><th>Meldingsdato</th><th>Meldingstype</th><th>Status</th>
   			<#list meldinger as melding>
-  			<tr id="nokkelr"> <td><button type="submit" id="btnleveranse" name="lukk1" value="${melding.meldingsnokkel}"  class="btn btn-default">Velg</button></td><td id="nokkel">${melding.meldingsnokkel}</td><td>${melding.datoforhendelse?date}</td><td>${melding.meldingsdato?date}</td><td>${melding.sjekklistesaksbehandling}</td> 
+  			<tr id="nokkelr"> <td><button type="submit" id="btnleveranse" name="lukk1" value="${melding.meldingsnokkel}"  class="btn btn-default">Velg</button></td><td id="nokkel">${melding.meldingsnokkel}</td><td>${melding.datoforhendelse?date}</td><td>${melding.meldingsdato?date}</td><td>${melding.supplerendeopplysninger}</td><td>${melding.sjekklistesaksbehandling}</td> 
   			</#list>
 		</table>  
      </div>
