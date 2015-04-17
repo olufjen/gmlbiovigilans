@@ -3,6 +3,7 @@ package no.naks.biovigilans_admin.web.control;
 import java.util.List;
 import java.util.Map;
 
+import no.naks.biovigilans.model.Vigilansmelding;
 import no.naks.biovigilans.service.MelderTableService;
 import no.naks.biovigilans.service.SaksbehandlingService;
 
@@ -14,5 +15,5 @@ public interface SaksbehandlingWebService {
 	public Map<String,List> selectMeldinger(String meldingsNokkel);
 	public MelderTableService getMelderTableService();
 	public void setMelderTableService(MelderTableService melderTableService);
-
+	public Map collectAnnenMeldinger(List<Vigilansmelding>meldinger);
 }
