@@ -67,7 +67,7 @@ public class SessionServerResource extends ProsedyreServerResource {
 	protected String datePart = "block";
 	
 	
-	List<String> hvagikkgaltList = new ArrayList<String>();
+	protected List<String> hvagikkgaltList = new ArrayList<String>();
 /*
  * Sessiomn objekter for giver	
  */
@@ -588,9 +588,12 @@ public class SessionServerResource extends ProsedyreServerResource {
  */
 	     List<Letter> letters = icd10WebService.getLetters();
 	     List<MainTerm> terms = new ArrayList();
-	     for (Letter letter : letters){
-	    	 terms.addAll(letter.getMainTerm());
+	     if (letters != null && !letters.isEmpty()){
+		     for (Letter letter : letters){
+		    	 terms.addAll(letter.getMainTerm());
+		     }	    	 
 	     }
+
 	     if (result == null){
 	    	 result = new PasientKomplikasjonWebModel();
 	
