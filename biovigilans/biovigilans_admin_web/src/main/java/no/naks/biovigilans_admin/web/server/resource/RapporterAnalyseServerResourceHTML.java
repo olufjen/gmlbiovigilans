@@ -11,7 +11,7 @@ import org.restlet.ext.freemarker.TemplateRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.Get;
-
+import no.naks.biovigilans.felles.server.resource.SessionServerResource;
 /**
  * @author oluf
  * RapporterAnalyseServerResourceHTML
