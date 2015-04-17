@@ -22,6 +22,7 @@ import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
+import no.naks.biovigilans.felles.server.resource.SessionServerResource;
 
 public class RapporterMainServerResourceHtml extends SessionServerResource {
 
