@@ -6,10 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import no.naks.biovigilans.web.model.PasientKomplikasjonWebModel;
-import no.naks.biovigilans.web.model.TransfusjonWebModel;
-import no.naks.biovigilans.web.xml.Letter;
-import no.naks.biovigilans.web.xml.MainTerm;
+import no.naks.biovigilans.felles.server.resource.SessionServerResource;
+
 
 import org.restlet.Request;
 import org.restlet.data.Form;

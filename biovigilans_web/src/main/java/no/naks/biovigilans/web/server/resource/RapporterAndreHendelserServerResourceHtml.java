@@ -14,8 +14,10 @@ import no.naks.biovigilans.model.Annenkomplikasjon;
 import no.naks.biovigilans.model.AnnenkomplikasjonImpl;
 import no.naks.biovigilans.model.Komplikasjonsklassifikasjon;
 import no.naks.biovigilans.model.Vigilansmelding;
-import no.naks.biovigilans.web.model.AnnenKomplikasjonwebModel;
-import no.naks.biovigilans.web.model.GiverKomplikasjonwebModel;
+import no.naks.biovigilans.felles.model.AnnenKomplikasjonwebModel;
+import no.naks.biovigilans.felles.model.GiverKomplikasjonwebModel;
+
+import no.naks.biovigilans.felles.server.resource.SessionServerResource;
 
 import org.apache.commons.lang.time.FastDateFormat;
 import org.restlet.Request;

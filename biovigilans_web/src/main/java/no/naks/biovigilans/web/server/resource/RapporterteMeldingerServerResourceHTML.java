@@ -7,7 +7,7 @@ import no.naks.biovigilans.model.Annenkomplikasjon;
 import no.naks.biovigilans.model.Giverkomplikasjon;
 import no.naks.biovigilans.model.Pasientkomplikasjon;
 import no.naks.biovigilans.model.Vigilansmelding;
-
+import no.naks.biovigilans.felles.server.resource.SessionServerResource;
 import org.restlet.Request;
 import org.restlet.data.Form;
 import org.restlet.data.LocalReference;

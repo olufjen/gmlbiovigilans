@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import no.naks.biovigilans.model.Vigilansmelding;
-import no.naks.biovigilans.web.model.DonasjonwebModel;
-import no.naks.biovigilans.web.model.GiverKomplikasjonwebModel;
-import no.naks.biovigilans.web.model.KomDiagnosegiverwebModel;
-import no.naks.biovigilans.web.model.MelderwebModel;
+import no.naks.biovigilans.felles.model.DonasjonwebModel;
+import no.naks.biovigilans.felles.model.GiverKomplikasjonwebModel;
+import no.naks.biovigilans.felles.model.KomDiagnosegiverwebModel;
+import no.naks.biovigilans.felles.model.MelderwebModel;
+
+import no.naks.biovigilans.felles.server.resource.SessionServerResource;
 
 import org.restlet.data.Form;
 import org.restlet.data.LocalReference;

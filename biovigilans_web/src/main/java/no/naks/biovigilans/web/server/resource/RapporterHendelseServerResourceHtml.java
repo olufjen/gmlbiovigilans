@@ -12,20 +12,22 @@ import javax.servlet.http.HttpSession;
 import javax.xml.bind.JAXBContext;
 import javax.xml.namespace.QName;
 
+
+import no.naks.biovigilans.felles.server.resource.SessionServerResource;
+
 import no.naks.biovigilans.model.Vigilansmelding;
-import no.naks.biovigilans.web.client.ICD10;
-import no.naks.biovigilans.web.client.ICD10Soap;
-import no.naks.biovigilans.web.control.SessionAdmin;
-import no.naks.biovigilans.web.control.TableWebService;
-import no.naks.biovigilans.web.model.MelderwebModel;
-import no.naks.biovigilans.web.model.PasientKomplikasjonWebModel;
-import no.naks.biovigilans.web.model.TransfusjonKvitteringWebModel;
-import no.naks.biovigilans.web.model.TransfusjonWebModel;
-import no.naks.biovigilans.web.xml.Letter;
-import no.naks.biovigilans.web.xml.MainTerm;
-import no.naks.biovigilans.web.xml.no.KodeNivaa1;
-import no.naks.biovigilans.web.xml.no.TematiskGruppeNivaa1;
-import no.naks.biovigilans.web.xml.no.TematiskGruppeNivaa2;
+
+import no.naks.biovigilans.felles.control.SessionAdmin;
+import no.naks.biovigilans.felles.control.TableWebService;
+import no.naks.biovigilans.felles.model.MelderwebModel;
+import no.naks.biovigilans.felles.model.PasientKomplikasjonWebModel;
+import no.naks.biovigilans.felles.model.TransfusjonKvitteringWebModel;
+import no.naks.biovigilans.felles.model.TransfusjonWebModel;
+import no.naks.biovigilans.felles.xml.Letter;
+import no.naks.biovigilans.felles.xml.MainTerm;
+import no.naks.biovigilans.felles.xml.no.KodeNivaa1;
+import no.naks.biovigilans.felles.xml.no.TematiskGruppeNivaa1;
+import no.naks.biovigilans.felles.xml.no.TematiskGruppeNivaa2;
 
 import org.restlet.Request;
 import org.restlet.data.Form;

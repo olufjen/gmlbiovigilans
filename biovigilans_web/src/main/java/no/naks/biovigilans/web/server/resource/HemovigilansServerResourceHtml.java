@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.namespace.QName;
 
-import no.naks.biovigilans.web.control.SessionAdmin;
-import no.naks.biovigilans.web.control.TableWebService;
-import no.naks.biovigilans.web.model.PasientKomplikasjonWebModel;
-import no.naks.biovigilans.web.xml.Letter;
-import no.naks.biovigilans.web.xml.MainTerm;
+import no.naks.biovigilans.felles.control.SessionAdmin;
+import no.naks.biovigilans.felles.server.resource.SessionServerResource;
+import no.naks.biovigilans.felles.control.TableWebService;
+import no.naks.biovigilans.felles.model.PasientKomplikasjonWebModel;
+
+
 
 import org.restlet.Request;
 import org.restlet.data.Form;

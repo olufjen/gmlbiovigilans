@@ -21,12 +21,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import no.naks.biovigilans.model.AnnenkomplikasjonImpl;
 import no.naks.biovigilans.model.Vigilansmelding;
-import no.naks.biovigilans.web.model.AnnenKomplikasjonwebModel;
-import no.naks.biovigilans.web.model.DonasjonwebModel;
-import no.naks.biovigilans.web.model.GiverKomplikasjonwebModel;
-import no.naks.biovigilans.web.model.MelderwebModel;
-import no.naks.biovigilans.web.model.TransfusjonWebModel;
-import no.naks.biovigilans.web.model.VigilansModel;
+import no.naks.biovigilans.felles.server.resource.SessionServerResource;
+import no.naks.biovigilans.felles.model.AnnenKomplikasjonwebModel;
+import no.naks.biovigilans.felles.model.DonasjonwebModel;
+import no.naks.biovigilans.felles.model.GiverKomplikasjonwebModel;
+import no.naks.biovigilans.felles.model.MelderwebModel;
+import no.naks.biovigilans.felles.model.TransfusjonWebModel;
+import no.naks.biovigilans.felles.model.VigilansModel;
 
 import org.restlet.Request;
 import org.restlet.data.Disposition;
