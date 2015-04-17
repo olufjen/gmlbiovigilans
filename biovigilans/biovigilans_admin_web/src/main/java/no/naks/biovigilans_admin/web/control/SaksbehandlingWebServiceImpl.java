@@ -3,6 +3,7 @@ package no.naks.biovigilans_admin.web.control;
 import java.util.List;
 import java.util.Map;
 
+import no.naks.biovigilans.model.Vigilansmelding;
 import no.naks.biovigilans.service.MelderTableService;
 import no.naks.biovigilans.service.SaksbehandlingService;
 import no.naks.framework.web.control.MasterWebServiceImpl;
@@ -53,5 +54,7 @@ public class SaksbehandlingWebServiceImpl extends MasterWebServiceImpl
 		return meldinger;
 	}
 
-
+	public Map collectAnnenMeldinger(List<Vigilansmelding>meldinger){
+		return saksbehandlingService.collectAnnenMeldinger(meldinger);
+	}
 }
