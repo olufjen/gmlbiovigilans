@@ -646,7 +646,7 @@ public class RapporterKontaktServerResourceHtml extends SessionServerResource {
 					if(rows.size() > 0){
 						melderwebModel.kontaktValues( rows);
 						melderwebModel.saveAnonym();
-						melderwebModel.saveValues();
+//						melderwebModel.saveValues();
 						
 						//sessionAdmin.getSession(getRequest(),melderId).invalidate();
 			    	}else{
@@ -696,7 +696,7 @@ public class RapporterKontaktServerResourceHtml extends SessionServerResource {
 			    				MediaType.TEXT_HTML);
     		}
     	}
-    	//emailWebService.sendEmail();
+ 
     	
     	return templateRep;
       
