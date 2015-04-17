@@ -192,12 +192,12 @@
 				}
 			</script>
 		<form id="rapport" action="?method=PUT" method="post"  > 
-			<h1>Rapporter Andre Hendelser</h1>
+			<h1>Rapportert Annen Hendelser</h1>
 			<!-- Nav tabs -->
 			<ul class="nav nav-tabs">
-			  <li ><a href="rapporter_hendelse_main.html" data-toggle="tab">Meld fra om</a></li>
+			  <li ><a href="rapporter_hendelse_main.html" data-toggle="tab">Opprett sak</a></li>
 			  <li><a href="rapporter_kontakt.html" data-toggle="tab">Kontaktinformasjon</a></li>
-			  <li class="active"><a href="#andrehendelser" data-toggle="tab">Rapporter Andre-hendelser</a></li>
+			  <li class="active"><a href="#andrehendelser" data-toggle="tab">Rapportert Annen hendelser</a></li>
 			</ul>
 		<div class="tab-pane" id="andrehendelser"> <!-- Start div andre hendelser -->
 				<div class="form-group" style="display: ${display}">
@@ -215,7 +215,7 @@
 					<input type="date" name="hendelsen-date" id="hendelsen-date" />
 				</div>
 			<div class="form-group" style="display: ${display}">
-				<label>Tidligere beskrivelse av hendelsen </label>
+				<label>Angitt beskrivelse av hendelsen </label>
 					<div>
  					<label>${annenHendelse.komplikasjonbeskrivelse}</label>
  					</div>
@@ -225,7 +225,7 @@
 					<textarea class="form-control"  name="beskrivelse" rows="3"  ></textarea>
 				</div>
 			<div class="form-group" style="display: ${display}">
-				<label>Tidligere oppgitt hovedprosess </label>
+				<label>Angitt oppgitt hovedprosess </label>
 					<div>
  					<label>${annenHendelse.hovedprosess}</label>
  					</div>
@@ -240,7 +240,7 @@
 	     		   	</select>
 				</div>
 			<div class="form-group" style="display: ${display}">
-				<label>Tidligere oppgitt primærårsak </label>
+				<label>Angitt oppgitt primærårsak </label>
 					<div>
  					<label>${annenHendelse.avvikarsak}</label>
  					</div>
@@ -255,7 +255,7 @@
 	     		   	</select>
 			</div>
 			<div class="form-group" style="display: ${display}">
-				<label>Tidligere oppgitt klassifikasjon </label>
+				<label>Angitt oppgitt klassifikasjon </label>
 					<div>
  					<label>${annenHendelse.klassifikasjon}</label>
  					<label>${annenHendelse.delkode}</label>
@@ -395,7 +395,7 @@
 								</div>
 						 	 
 								<div class="form-group" style="display: ${display}">
-									<label>Tidligere oppgitt opplysninger om pasienten </label>
+									<label>Angitt oppgitt opplysninger om pasienten </label>
 									<div>
  									<label>${annenHendelse.pasientopplysninger}</label>
  									</div> 
@@ -718,7 +718,7 @@
 					
 				</div>
 		<div class="form-group" style="display: ${display}">
-				<label>Tidligere oppgitt Definisjon alvorlig hendelse</label>
+				<label>Angitt oppgitt Definisjon alvorlig hendelse</label>
 					<div>
  					<label>${annenHendelse.komplikasjondefinisjon}</label>
  					</div>
@@ -733,7 +733,7 @@
 	     		   	</select>
 				</div>
 				<div class="form-group" style="display: ${display}">
-				<label>Tidligere oppgitt hvordan hendelsen ble oppdaget </label>
+				<label>Angitt oppgitt hvordan hendelsen ble oppdaget </label>
 					<div>
  					<label>${annenHendelse.oppdaget}</label>
  					</div>
@@ -748,7 +748,7 @@
 	     		   	</select>
 				</div>
 			<div class="form-group" style="display: ${display}">
-				<label>Tidligere oppgitt tiltak </label>
+				<label>Angitt oppgitt tiltak </label>
 					<div>
  					<label>${annenHendelse.tiltak}</label>
  					</div>
@@ -758,7 +758,7 @@
 					<textarea class="form-control" name="planlagtetiltak" rows="3"  ></textarea>
 				</div>
 			<div class="form-group" style="display: ${display}">
-				<label>Tidligere oppgitt kommentar </label>
+				<label>Angitt oppgitt kommentar </label>
 					<div>
  					<label>${annenHendelse.kommentar}</label>
  					</div>
@@ -769,7 +769,7 @@
 				</div>
 				
 			<div class="form-group" style="display: ${display}">
-									<label>Tidligere oppgitt ytterligere opplysninger </label>
+									<label>Angitt oppgitt ytterligere opplysninger </label>
 									<div>
  									<label>${annenHendelse.kladd}</label>
  									</div> 
