@@ -90,7 +90,7 @@
                         </list>
                 </property>
          </bean>
-        <bean id="tableWebService" class="no.naks.biovigilans.web.control.TableWebServiceImpl">
+        <bean id="tableWebService" class="no.naks.biovigilans.felles.control.TableWebServiceImpl">
         <!--  
                 <property name="masterDictionary" ref="domainDictionary"></property>
                 <property name="foretakKey" value="foretakkey"></property>
@@ -102,7 +102,7 @@
 
 
         </bean>
-        <bean id="ICD10WebService" class="no.naks.biovigilans.web.control.ICD10WebServiceImpl">
+        <bean id="ICD10WebService" class="no.naks.biovigilans.felles.control.ICD10WebServiceImpl">
 <!--  C:\\biovigilans\\temp\\ICD10CM.xml  C:\biovigilans\temp     -->
  <!--        <property name="xmlFillocation" value= "Z:\\prosjekter\\hemovgilans\\icd10\\ICD10CM_FY2014_Full_XML\\ICD10CM.xml" ></property>   -->   
 				<property name="xmlFillocation" value= "C:\\biovigilans\\temp\\icd10no.xml" ></property>  
@@ -742,7 +742,7 @@
         </bean>
  
      
-        <bean id="emailWebService" class="no.naks.biovigilans.web.control.EmailWebServiceImpl">
+        <bean id="emailWebService" class="no.naks.biovigilans.felles.control.EmailWebServiceImpl">
         	<property name="mailer" ref="mailer" ></property>
         	<property name="mailAuthenticatorUser" value="${authenticatorUser}"></property>
         	<property name="mailAuthenticatorPwd" value="${authenticatorPwd}"></property>
@@ -754,33 +754,33 @@
         </bean>
         <bean id="mailer" class="no.naks.rammeverk.mailer.MailerImpl" ></bean>
         
-        <bean id="sessionAdmin" class="no.naks.biovigilans.web.control.SessionAdminImpl">
+        <bean id="sessionAdmin" class="no.naks.biovigilans.felles.control.SessionAdminImpl">
         </bean>
 
 
         <bean id="propertiesHolder" class="no.naks.web.properties.PropertiesHolder">
                 <property name="imagePath" value="${image.archive.path}" />
         </bean>
-        <bean id="hendelseWebService" class="no.naks.biovigilans.web.control.HendelseWebServiceImpl">
+        <bean id="hendelseWebService" class="no.naks.biovigilans.felles.control.HendelseWebServiceImpl">
                 <property name="pasientService" ref="PasientTableService"></property>
                 <property name="hendelseTablesService" ref="hendelseTablesService"></property>
         </bean>
-        <bean id="giverWebService" class="no.naks.biovigilans.web.control.GiverWebServiceImpl" >
+        <bean id="giverWebService" class="no.naks.biovigilans.felles.control.GiverWebServiceImpl" >
                 <property name="giverTableService" ref="giverTableService"></property>
         </bean>
-		<bean id="annenKomplikasjonWebService"  class="no.naks.biovigilans.web.control.AnnenKomplikasjonWebServiceImpl">
+		<bean id="annenKomplikasjonWebService"  class="no.naks.biovigilans.felles.control.AnnenKomplikasjonWebServiceImpl">
 				<property name="annenKomplikasjonTableService" ref="annenKomplikasjonTableService"></property>
 		</bean>
-		<bean id="komplikasjonsklassifikasjonWebService" class="no.naks.biovigilans.web.control.KomplikasjonsklassifikasjonWebServiceImpl" >
+		<bean id="komplikasjonsklassifikasjonWebService" class="no.naks.biovigilans.felles.control.KomplikasjonsklassifikasjonWebServiceImpl" >
 			<property name="komplikasjonsklassifikasjonTableService" ref="komplikasjonsklassifikasjonTableService"></property>
 		</bean>
-        <bean id="donasjonWebService" class="no.naks.biovigilans.web.control.DonasjonWebServiceImpl">
+        <bean id="donasjonWebService" class="no.naks.biovigilans.felles.control.DonasjonWebServiceImpl">
                 <property name="donasjonTableService" ref="donasjonTableService"></property>
         </bean>
-       		<bean id="komDiagnosegiverWebService" class = "no.naks.biovigilans.web.control.KomDiagnosegiverWebServiceImpl">
+       		<bean id="komDiagnosegiverWebService" class = "no.naks.biovigilans.felles.control.KomDiagnosegiverWebServiceImpl">
 			<property name="komDiagnosegiverTableService" ref="komDiagnosegiverTableService"></property>
 		</bean>
-        <bean id="melderWebService" class="no.naks.biovigilans.web.control.MelderWebServiceImpl">
+        <bean id="melderWebService" class="no.naks.biovigilans.felles.control.MelderWebServiceImpl">
 			<property name="melderTableService" ref="melderTableService"></property>
 		</bean>
 	
