@@ -37,4 +37,12 @@ import no.naks.rammeverk.kildelag.dao.Tablesupdate;
 	public void setSelectgiverKomplikasjonSQL(String selectgiverKomplikasjonSQL);
 	public String[] getGiverkomplikasjonTableDefs();
 	public void setGiverkomplikasjonTableDefs(String[] giverkomplikasjonTableDefs);
+	public String getSelectDonasjonSQL();
+	public void setSelectDonasjonSQL(String selectDonasjonSQL);
+	public String[] getDonasjonTabledefs();
+	public void setDonasjonTabledefs(String[] donasjonTabledefs);
+	public String getSelectgiverSQL();
+	public void setSelectgiverSQL(String selectgiverSQL);
+	public String[] getGiverTableDefs();
+	public void setGiverTableDefs(String[] giverTableDefs);
 }
