@@ -1,5 +1,6 @@
 package no.naks.biovigilans.model;
 
+import java.util.Date;
 import java.util.Map;
 
 public interface Donasjon {
@@ -9,6 +10,8 @@ public interface Donasjon {
 	public void setDonasjonsId(Long donasjonsId);
 	public String getDonasjonssted();
 	public void setDonasjonssted(String donasjonssted);
+	public Date getDonasjonsdato();
+	public void setDonasjonsdato(Date donasjonsdato);
 	public String getKomplisertvenepunksjon();
 	public void setKomplisertvenepunksjon(String komplisertvenepunksjon);
 	public String getTappetype();
