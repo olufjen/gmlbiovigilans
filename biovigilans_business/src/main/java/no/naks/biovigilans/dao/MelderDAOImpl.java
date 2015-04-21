@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.SqlParameter;
 
+import no.naks.biovigilans.model.Donasjon;
+import no.naks.biovigilans.model.Giverkomplikasjon;
 import no.naks.biovigilans.model.Melder;
 import no.naks.biovigilans.model.Vigilansmelding;
 import no.naks.rammeverk.kildelag.dao.AbstractAdmintablesDAO;
@@ -28,11 +30,18 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 	private String[] pasientkomplikasjonTableDefs;
 	private String selectgiverKomplikasjonSQL;
 	private String[] giverkomplikasjonTableDefs;
+	private String selectDonasjonSQL;
+	private String[] donasjonTabledefs;
+	private String selectgiverSQL;
+	private String[] giverTableDefs;
 	
 	
 	private String pasientKey = "pasientKomp"; // Nøkkel dersom melding er av type pasientkomplikasjon
 	private String giverKey = "giverkomp"; 	// Nøkkel dersom melding er at type giverkomplikasjon
 	private String andreKey = "annenKomp";
+	private String donasjonKey = "donasjonen";
+	private String giverenKey = "giver";
+	
 	private String delMeldingKey = null;
 	
 	private Tablesupdate tablesUpdate = null;
@@ -40,9 +49,35 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 	private AnnenkomplikasjonSelect annenmeldingSelect = null;
 	private PasientkomplikasjonSelect pasientmeldingSelect = null;
 	private GiverkomplikasjonSelect givermeldingSelect = null;
-	
+	private DonasjonSelect donasjonSelect = null;
+	private GiverSelect giverSelect = null;
+	private Map alleMeldinger = null;
 
 	
+	public String getSelectDonasjonSQL() {
+		return selectDonasjonSQL;
+	}
+	public void setSelectDonasjonSQL(String selectDonasjonSQL) {
+		this.selectDonasjonSQL = selectDonasjonSQL;
+	}
+	public String[] getDonasjonTabledefs() {
+		return donasjonTabledefs;
+	}
+	public void setDonasjonTabledefs(String[] donasjonTabledefs) {
+		this.donasjonTabledefs = donasjonTabledefs;
+	}
+	public String getSelectgiverSQL() {
+		return selectgiverSQL;
+	}
+	public void setSelectgiverSQL(String selectgiverSQL) {
+		this.selectgiverSQL = selectgiverSQL;
+	}
+	public String[] getGiverTableDefs() {
+		return giverTableDefs;
+	}
+	public void setGiverTableDefs(String[] giverTableDefs) {
+		this.giverTableDefs = giverTableDefs;
+	}
 	public String getSelectgiverKomplikasjonSQL() {
 		return selectgiverKomplikasjonSQL;
 	}
@@ -165,7 +200,7 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 	 */
 	public Map<String,List> selectMeldinger (String meldingsNokkel){
 		int type = Types.VARCHAR;
-		Map alleMeldinger = new HashMap<String,List>();
+		alleMeldinger = new HashMap<String,List>();
 		vigilansSelect = new VigilansSelect(getDataSource(),selectvigilansMeldingSQL,vigilandsMeldingTableDefs);
 		vigilansSelect.declareParameter(new SqlParameter(type));
 		List meldinger = vigilansSelect.execute(meldingsNokkel);
@@ -205,8 +240,50 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 			givermeldingSelect = new GiverkomplikasjonSelect(getDataSource(),selectgiverKomplikasjonSQL,giverkomplikasjonTableDefs);
 			givermeldingSelect.declareParameter(new SqlParameter(nType));
 			delMeldinger = givermeldingSelect.execute(mId);
+			Giverkomplikasjon komplikasjon = null;
+			if (delMeldinger != null && !delMeldinger.isEmpty()){
+				komplikasjon = (Giverkomplikasjon) delMeldinger.get(0);
+				Long dId = komplikasjon.getDonasjonid();
+				List donasjoner = velgDonasjon(dId,nType);
+				alleMeldinger.put(donasjonKey,donasjoner);
+				Donasjon donasjon = null;
+				if (donasjoner != null && !donasjoner.isEmpty()){
+					donasjon = (Donasjon)donasjoner.get(0);
+					int gId = donasjon.getGiveId();
+					Long giverId = new Long(gId);
+					List givere = velgGiver(giverId,nType);
+					alleMeldinger.put(giverenKey,givere);
+				}
+			}
+			
 		}
 		return delMeldinger;
 		
+	}
+	/**
+	 * velgdonasjon
+	 * Denne rutinen henter donasjoner til en gitt giverkomplikasjon
+	 * @param dId
+	 * @param nType
+	 * @return
+	 */
+	private List velgDonasjon(Long dId, int nType){
+		donasjonSelect = new DonasjonSelect(getDataSource(),selectDonasjonSQL,donasjonTabledefs);
+		donasjonSelect.declareParameter(new SqlParameter(nType));
+		List donasjoner = donasjonSelect.execute(dId);
+		return donasjoner;
+	}
+	/**
+	 * velgGiver
+	 * Denne rutinen henter giver til engitt donasjon
+	 * @param dId
+	 * @param nType
+	 * @return
+	 */
+	private List velgGiver(Long dId, int nType){
+		giverSelect = new GiverSelect(getDataSource(),selectgiverSQL,giverTableDefs);
+		giverSelect.declareParameter(new SqlParameter(nType));
+		List givere = giverSelect.execute(dId);
+		return givere;
 	}
 }	
