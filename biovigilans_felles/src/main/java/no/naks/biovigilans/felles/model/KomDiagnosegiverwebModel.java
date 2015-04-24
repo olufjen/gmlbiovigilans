@@ -38,8 +38,8 @@ public class KomDiagnosegiverwebModel extends VigilansModel {
 			String userEntry = userEntries.get(field);
 			komDiagnosegiver.saveField(field, userEntry);
 		}
-		
-		komDiagnosegiver.saveToField();*/
+*/		
+		komDiagnosegiver.saveToField(); // Endret tatt inn kall til saveTofields !! OLJ 23.04.15
 		
 	}	
 
