@@ -54,7 +54,7 @@ public class KomplikasjonsdiagnosegiverImpl extends
 		setLokalskadebeskrivelse(null);
 		setSystemiskbivirkning(null);
 		setBivirkningbeskrivelse(null);
-		setAnnenreaksjon(null);
-		setAnnenreaksjonbeskrivelse(null);
+//		setAnnenreaksjon(null); Dette er fjernet fra skjermbildet !!
+//		setAnnenreaksjonbeskrivelse(null);
 	}
 }
