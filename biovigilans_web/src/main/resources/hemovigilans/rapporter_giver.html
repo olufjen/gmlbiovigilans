@@ -349,7 +349,12 @@
  					</div>
 			</div>
 		
-		
+		<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt kjønn</label>
+			<div>
+				<label>${giver.kjonn}</label>
+			</div>
+		</div>
 		
 	    <div class="form-group">
 	        <label>Kjønn</label>
@@ -364,6 +369,15 @@
 	          </label>
 		    </div>
 	    </div>
+	    
+		<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt alder</label>
+			<div>
+				<label>${giver.alder}</label>
+			</div>
+		</div>	    
+	    
+	    
 	    <div class="form-group">
 	      <label>Alder</label>
 <!-- 	      <input name ="tab-alder" list="giveralder" class="form-control"> -->
@@ -374,6 +388,14 @@
 	     		</#list>
 	     </select>
 	    </div>
+		<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt vekt</label>
+			<div>
+				<label>${giver.vekt}</label>
+			</div>
+		</div>
+
+
 	    
 	   <div class="form-group">
 	    
@@ -381,7 +403,13 @@
 	      <input type="number"  min="45" max="110" name="givervektkg" size="80"  class="form-control"/>
 	      <span style="color:red" id="vektkgError" ></span>
 	   </div>
-	   
+
+		<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt givererfaring</label>
+			<div>
+				<label>${giver.givererfaring}</label>
+			</div>
+		</div>	   
 	    
 	    <div class="form-group">
 	      <label>Givererfaring</label>
@@ -398,6 +426,13 @@
 	    </div>
 	    <div id="tab-tidligere" class="form-group"  style="display: none" >
 	      <label>Tidligere reaksjoner på tapping</label>
+ 
+		<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt reaksjoner</label>
+			<div>
+				<label>${giver.tidligerekomlikasjonjanei}</label>
+			</div>
+		</div>	 	      
 	      <div class="radio" >
 	          <label>
 	          	<input type="radio" name="tab-tidl-tapp" id="tab-tidl-tapp" value="ja" onclick="toggleDisplay('beskriv-ja',  this.checked);"/>Ja
@@ -414,16 +449,32 @@
 	          </label>
 		    </div>
 	    </div>
+	
+
+<!-- Text felt !! -->	    
+	<div id="beskriv-ja"  style="display: none" >
 	    
-	    <div id="beskriv-ja"  style="display: none" >
+	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt beskrivelse av reaksjoner</label>
+			<div>
+				<label>${giver.tidligerekomplikasjonforklaring}</label>
+			</div>
+	</div>	    
 	    	<label>Beskrivelse av tidligere reaksjon</label>
 		  	<textarea class="form-control" name="tab-reaksjon-beskriv" rows="3"></textarea>
-	    </div>
+	 </div>
 	    <h3>Donasjon</h3>
 	    <div class="form-group" style="display: ${displaydate}">
 	    	<label>Donasjonsdato</label><br>
 	    	<input type="date" required="required" name="dato-donasjon" id="dato-donasjon" onchange="dateValidation();"  />
 	    </div>
+	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt donasjonssted</label>
+			<div>
+				<label>${donasjonen.donasjonssted}</label>
+			</div>
+	</div>	    
+	    
 	    <div class="form-group">
 	      <label>Donasjonssted</label>
 	      <select name ="tab-sted" id="tappested" required="required" class="form-control">
@@ -435,6 +486,13 @@
 	    </div>
 	    <div id="type-tapping"  class="form-group"  style="display: none" >
 	      <label>Type tapping</label> <!-- Dersom aferese : første gang aferese /etablert aferese -->
+	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt type tapping</label>
+			<div>
+				<label>${donasjonen.tappetype}</label>
+			</div>
+		</div>	      
+	      
 	      	<div class="radio">
 		      	<label>
 		      		<input type="radio" name="type-tapping"  id="type-tapping" value="fullblod"   onclick="toggleDisplay('fullblod-options',this.checked); toggleDisplay('aferese-options',0)" /> Fullblod 
@@ -519,7 +577,12 @@
 		      	</label>
 	      	</div>
 	    </div>
-	    
+	 <div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt Måltid før tapping</label>
+			<div>
+				<label>${donasjonen.maltidfortapping}</label>
+			</div>
+	</div>	
 	    <div class="form-group">
 	     <label>Måltid innen tre timer før tapping</label>
 	      <div class="radio">
@@ -538,6 +601,13 @@
 	          </label>
 		    </div>
 	    </div>
+	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgittkomplisert venepunksjon</label>
+			<div>
+				<label>${donasjonen.komplisertvenepunksjon}</label>
+			</div>
+	</div>	
+    
 	    <div class="form-group">
 	    <label>Komplisert venepunksjon</label>
 	      <div class="radio">
@@ -557,7 +627,12 @@
 		    </div>
 	    </div>
 	    <h3>Giverkomplikasjon</h3>
-	    
+	 <div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt Hvor startet reaksjonen</label>
+			<div>
+				<label>${giverkomplikasjonen.stedforkomplikasjon}</label>
+			</div>
+	</div>		    
 	    <div class="form-group">
 	      <label>Hvor startet reaksjonen?</label>
 	       <select id="re" name ="tab-hvor" list="icd10gruppehvor" class="form-control" required="required" onchange="blodbankenOptions()"  >
@@ -582,6 +657,13 @@
 			 	</#list>
 		  </select>
 	    </div>
+	    
+	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt tid fra tapping til reaksjon</label>
+			<div>
+				<label>${giverkomplikasjonen.tidfratappingtilkompliasjon}</label>
+			</div>
+	</div>	
 		<div class="form-group">
 			<label>Tid fra start tapping til reaksjon</label>
 	    	<div class="radio">
@@ -627,6 +709,14 @@
 	    
 	    <div class="form-group" >
 		    <label>Type komplikasjon</label>
+
+	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt lokal skade</label>
+			<div>
+				<label>${giverkomplikasjondiagnose.lokalskadearm}</label>
+			</div>
+	</div>				    
+	    
 		    <div class="form-group">
 		      <label>Lokal:</label>
 		      <div class="radio">
@@ -643,6 +733,13 @@
 		
 		    <div id="tabskaearm-ja" class="form-group"  style="display: none"  >
 		      <label>Hvis Ja</label>
+	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt lokal skade beskrivelse</label>
+			<div>
+				<label>${giverkomplikasjondiagnose.lokalskadebeskrivelse}</label>
+			</div>
+	</div>
+ 				      
 		      <select name ="tab-tabskadearm" id="tabskadearm" class="form-control" title="xyz" onchange="showarmenblide();showfolgetekst()">
 	       		<option ></option>
 	       		<#list giverkomplikasjon.skadeiarmen as skadeiarmen>
@@ -669,6 +766,19 @@
 		    
 		    <div class="form-group">
 		     <label>Systemisk</label>
+		     
+	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt systemisk skade</label>
+			<div>
+				<label>${giverkomplikasjondiagnose.systemiskbivirkning}</label>
+			</div>
+	</div>	
+	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt systemisk skade spesifikasjoner</label>
+			<div>
+				<label>${giverkomplikasjondiagnose.bivirkningbeskrivelse}</label>
+			</div>
+	</div>					     
 		      <div class="radio">
 		          <label>
 		          	<input type="radio"  name="tab-bivirk" id="tab-bivirk" required="required" value="Systemisk-Ja" onclick="toggleDisplay('systemiskbivirkning-ja', this.checked);"/>Ja
@@ -717,7 +827,12 @@
 			</div>  -->
 		
 	    </div>
-	    
+	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt varighet skade</label>
+			<div>
+				<label>${giverkomplikasjonen.varighetkomplikasjon}</label>
+			</div>
+	</div>		    
 	      
 	   	<div class="form-group">
 	   		<label>Varighet av komplikasjon/bivirkning/skade</label>
@@ -736,6 +851,12 @@
 	    <div class="form-group">
 	    	<h3>Tiltak rettet mot giver</h3>
 	    	  <label>Strakstiltak:</label>
+	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt strakstiltak</label>
+			<div>
+				<label>${giveroppfolging.strakstiltak}</label>
+			</div>
+	</div>	
 		      	<div class="radio">
 		          <label title="Ingen">
 		          	<input type="radio"  name="tab-strakstiltak" id="tab-strakstiltak0" required="required"  onclick="toggleDisplay('behandlingselected', 0);toggleDisplay('behandling', 0)" value="Ingen" title="Ingen"/>
@@ -814,6 +935,12 @@
 		</div> -->
 	  	 <div class="form-group" >
 	  	  <label>Videre behandling/oppfølging </label>
+	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt videre behandling/oppfølging</label>
+			<div>
+				<label>${giveroppfolging.videreoppfolging}</label>
+			</div>
+	</div>	
 	       	  <div class="radio">
 		          <label >
 		          	<input type="radio"  name="tab-behandling" id="tab-behandling-ja" required="required" onclick="toggleDisplay('behandlingJa', this.checked);" value="Videre Behandling Ja"  />
@@ -879,6 +1006,12 @@
 	    <div class="form-group" >
 			
 			<h3>Alvorlighetsgrad </h3>
+	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt tid alvorlighetsgrad</label>
+			<div>
+				<label>${giverkomplikasjonen.alvorlighetsgrad}</label>
+			</div>
+	</div>	
 			<div class="radio">
 				<label title="Forbigående skade/ negativ helseeffekt som ikke krevde omfattende behandling.">
 					<input type="radio"  name="alvor-mang" id="grad1" required="required" value="Grad 1 Mindre alvorlig 1a Ubetydelig"/>
@@ -916,6 +1049,13 @@
 	    <div class="form-group">
 	   
 	      <h3>Endelig utfall av skaden</h3>
+	 <div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt endelig utfall av skaden</label>
+			<div>
+				<label>${giverkomplikasjonen.kliniskresultat}</label>
+			</div>
+	</div>	
+	      
 	      <div class="radio">
 	          <label title="Ingen subjektive symptomer eller kliniske funn som følge av skaden/ full helbredelse.">
 	          	<input type="radio"  name="tab-klinisk" id="tab-helbredelse" required="required" value="ingen-sekvele" title="Ingen subjektive symptomer eller kliniske funn som følge av skaden/ full helbredelse."/>
@@ -950,6 +1090,13 @@
 	  	
 	  	<div class="form-group">
 	  		<h3>Kunne komplikasjonen ha vært forebygget?</h3>
+	 <div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt planlagte eller gjennomførte forbedringstiltak</label>
+			<div>
+				<label>${giveroppfolging.giveroppfolgingbeskrivelse}</label>
+			</div>
+	</div> 		
+	  		
 		      	<div class="radio">
 		          <label>
 		          	<input type="radio"  name="tab-forebyggbar" id="tab-forebyggbar1" required="required"  value="forebyggbar-ja" onclick="toggleDisplay('forbedringtiltak',this.checked);"/>Ja
@@ -994,6 +1141,13 @@
 		</div>
 	</div>
 	 -->
+	 
+	 	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt avregistrering</label>
+			<div>
+				<label>${giverkomplikasjonen.tilleggsopplysninger}</label>
+			</div>
+	</div>	
 	    <div class="form-group">
 	     <label>Giver er avregistrert (pga komplikasjonen)</label>
 	      	<div class="radio">
@@ -1025,6 +1179,12 @@
 	          </label>
 		    </div>
 	    </div>
+  	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt ytterligere opplysninger</label>
+			<div>
+				<label>${giverkomplikasjon.vigilansmelding.kladd}</label>
+			</div>
+	</div>	
 	 	<div class="form-group">
 			<label>Ytterligere opplysninger følger</label>
 				<div class="radio">
