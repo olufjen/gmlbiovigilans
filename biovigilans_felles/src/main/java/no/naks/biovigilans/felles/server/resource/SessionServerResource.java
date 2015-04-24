@@ -38,7 +38,7 @@ import no.naks.biovigilans.felles.xml.no.TematiskGruppeNivaa2;
 public class SessionServerResource extends ProsedyreServerResource {
 
 /*
- * Session objekter for transfusjon	
+ * Session objekter 
  */
 	protected PasientKomplikasjonWebModel result = null;
 	protected TransfusjonWebModel transfusjon = null;
@@ -56,8 +56,16 @@ public class SessionServerResource extends ProsedyreServerResource {
 	protected String transfusjonId = "transfusjon";					// Benyttes som nøkkel til HTML-sider
 	protected String kvitteringsId = "kvittering";					// Benyttes som nøkkel for kvitteringssiden
 	protected String kvitteringGiverId = "giverKvittering";
+	protected String giverkomplikasjonId="giverkomplikasjon"; 		// Benyttes som nøkkel for giverwebmodel
+	protected String donasjonId ="donasjon";						// Benyttes som nøkkel for donasjonwebmodel
+	protected String komDiagnosegiverId = "komDiagnosegiver";
+	protected String vigilansmeldingId="vigilansmelding";
 	protected String messageType = "none";
-	
+	protected String giverenKey="giver";
+	protected String donasjonKey = "donasjonen";
+	protected String giverkomplikasjonKey = "giverkomplikasjonen"; 	// Benyttes som nøkkel for giverkomplikasjon
+	protected String giverOppfolgingKey = "giveroppfolging";
+	protected String giverkomplikasjondiagnoseKey = "giverkomplikasjondiagnose";
 /*
  * Til bruk for oppfølgingsmeldinger	
  */
@@ -79,10 +87,7 @@ public class SessionServerResource extends ProsedyreServerResource {
 	protected String[] reaksjonengruppe;
 	protected String[] utenforBlodbankengruppe;
 	protected String[] donasjonsstedgruppe;
-	protected String giverkomplikasjonId="giverkomplikasjon";
-	protected String donasjonId ="donasjon";
-	protected String komDiagnosegiverId = "komDiagnosegiver";
-	protected String vigilansmeldingId="vigilansmelding";
+
 
 	protected String[] systemiskgruppe;
 	protected String[] skadeiarmen;
