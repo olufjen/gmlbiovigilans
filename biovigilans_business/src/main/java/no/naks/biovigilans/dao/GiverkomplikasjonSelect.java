@@ -10,6 +10,12 @@ import no.naks.biovigilans.model.Giverkomplikasjon;
 import no.naks.biovigilans.model.GiverkomplikasjonImpl;
 import no.naks.rammeverk.kildelag.dao.AbstractSelect;
 
+/**
+ * GiverkomplikasjonSelect
+ * Denne klassen gjør oppslag mot giverkomplikasjoner
+ * @author olj
+ *
+ */
 public class GiverkomplikasjonSelect extends AbstractSelect {
 
 	public GiverkomplikasjonSelect(DataSource dataSource, String sql,
