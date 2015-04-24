@@ -78,6 +78,22 @@
   	<property name="giverkomplikasjonTableDefs" value="${giverkomplikasjon.meldeid},${giverkomplikasjon.donasjonsid},${giverkomplikasjon.stedforkomplikasjon},${giverkomplikasjon.tidfrarapporteringtilkomplikasjon},
   	${giverkomplikasjon.behandlingssted},${giverkomplikasjon.tilleggsopplysninger},${giverkomplikasjon.alvorlighetsgrad},${giverkomplikasjon.kliniskresultat},
   	${giverkomplikasjon.varighetkomplikasjon},${giverkomplikasjon.datosymptomer}"></property>
+  	<property name="selectDonasjonSQL" value="${donasjon.select}"></property>
+  	<property name="donasjonTabledefs" value="${donasjon.donasjonsid},${donasjon.donasjonssted},${donasjon.komplisertvenepunksjon},
+  	${donasjon.tappetype},${donasjon.tappevarighet},${donasjon.lokalisasjonvenepunksjon},${donasjon.maltidfortapping},${donasjon.giverid},
+  	${donasjon.donasjonsdato}"></property>
+  	<property name="selectgiverSQL" value="${giver.select}"></property>
+  	<property name="giverTableDefs" value="${giver.giverid},${giver.kjonn},${giver.alder},${giver.vekt},${giver.givererfaring},
+  	${giver.tidligerekomplikasjon},${giver.tidligerekomplikasjonforklaring},${giver.givererfaringaferese}"></property>
+  	<property name="giveroppfolgingSQL" value="${giveroppfolging.select}"></property>
+  	<property name="giveroppfolgingTableDefs" value="${giveroppfolging.giveroppfolgingid},${giveroppfolging.klassifikasjongiveroppfolging},
+  	${giveroppfolging.giveroppfolgingbeskrivelse},${giveroppfolging.avregistrering},${giveroppfolging.strakstiltak},${giveroppfolging.videreoppfolging},
+  	${giveroppfolging.meldeid}"></property>
+  	<property name="komplikasjonsdiagnosegiverSQL" value="${komplikasjonsdiagnosegiver.select}"></property>
+  	<property name="komplikasjonsdiagnosegiverTableDefs" value="${komplikasjondiagnosegiver.komplikasjonsdiagnoseid},${komplikasjondiagnosegiver.lokalskadearm},
+  	${komplikasjondiagnosegiver.systemiskbivirkning},${komplikasjondiagnosegiver.annenreaksjon},${komplikasjondiagnosegiver.lokalskadebeskrivelse},
+  	${komplikasjondiagnosegiver.bivirkningbeskrivelse},${komplikasjondiagnosegiver.annenreaksjonbeskrivelse},${komplikasjondiagnosegiver.kommentar},
+  	${komplikasjondiagnosegiver.meldeid}"></property>
   </bean>
   <bean id="komplikasjonsdiagnosegiverDAO" class="no.naks.biovigilans.dao.KomplikasjonsdiagnosegiverDAOImpl" >
   	<property name="jdbcTemplate" ref="jdbcTemplatebiovigilans"></property>
