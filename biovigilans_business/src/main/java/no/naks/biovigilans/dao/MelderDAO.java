@@ -55,4 +55,17 @@ import no.naks.rammeverk.kildelag.dao.Tablesupdate;
 	public String[] getKomplikasjonsdiagnosegiverTableDefs();
 	public void setKomplikasjonsdiagnosegiverTableDefs(
 			String[] komplikasjonsdiagnosegiverTableDefs);
+	public String getSelecttransfusjonSQL();
+	public void setSelecttransfusjonSQL(String selecttransfusjonSQL);
+	public String[] getTransfusjonTableDefs();
+	public void setTransfusjonTableDefs(String[] transfusjonTableDefs);
+	public String getSelectPasientSQL();
+	public void setSelectPasientSQL(String selectPasientSQL);
+	public String[] getPasientTableDefs();
+	public void setPasientTableDefs(String[] pasientTableDefs);
+	public String getSelectSykdomSQL();
+	public void setSelectSykdomSQL(String selectSykdomSQL);
+	public String[] getSykdomTableDefs();
+	public void setSykdomTableDefs(String[] sykdomTableDefs);
+	
 }
