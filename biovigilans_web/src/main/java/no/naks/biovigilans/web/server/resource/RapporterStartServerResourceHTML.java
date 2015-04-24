@@ -5,10 +5,15 @@ import java.util.List;
 import java.util.Map;
 
 import no.naks.biovigilans.model.Annenkomplikasjon;
+import no.naks.biovigilans.model.Donasjon;
+import no.naks.biovigilans.model.Giver;
 import no.naks.biovigilans.model.Giverkomplikasjon;
+import no.naks.biovigilans.model.Giveroppfolging;
+import no.naks.biovigilans.model.Komplikasjonsdiagnosegiver;
 import no.naks.biovigilans.model.Pasientkomplikasjon;
 import no.naks.biovigilans.model.Vigilansmelding;
 import no.naks.biovigilans.felles.server.resource.SessionServerResource;
+
 import org.restlet.Request;
 import org.restlet.data.Form;
 import org.restlet.data.LocalReference;
@@ -23,6 +28,11 @@ import org.restlet.resource.Post;
 
 import freemarker.template.SimpleScalar;
 
+/**
+ * @author olj
+ *  Denne resursen er knyttet til startsiden for Hemovigilans. 
+ *  Her velger bruker om det er en ny melding eller en oppfølgingsmelding
+ */
 public class RapporterStartServerResourceHTML extends SessionServerResource {
 
 	
@@ -195,6 +205,29 @@ public class RapporterStartServerResourceHTML extends SessionServerResource {
         			Giverkomplikasjon giverKomplikasjon = (Giverkomplikasjon)giverMeldinger.get(0);
         			Vigilansmelding lokalMelding = (Vigilansmelding) giverKomplikasjon;
         			setMeldingsValues(lokalMelding, melding);
+        			Giver giver = null;
+        			Donasjon donasjonen = null;
+        			List givere = alleMeldinger.get(giverenKey);
+        			List donasjoner = alleMeldinger.get(donasjonKey);
+        			List giveroppfolginger = alleMeldinger.get(giverOppfolgingKey);
+        			List komplikasjonsdiagnosergiver = alleMeldinger.get(giverkomplikasjondiagnoseKey);
+        			
+        			if (givere != null && !givere.isEmpty()){
+        				giver = (Giver)givere.get(0);
+        				sessionAdmin.setSessionObject(request, giver,giverenKey);
+        			}
+        			if (donasjoner != null && !donasjoner.isEmpty()){
+        				donasjonen = (Donasjon)donasjoner.get(0);
+        				sessionAdmin.setSessionObject(request, donasjonen,donasjonKey);
+        			}
+        			if (giveroppfolginger != null && !giveroppfolginger.isEmpty()){
+        				Giveroppfolging giveroppfolging = (Giveroppfolging)giveroppfolginger.get(0);
+        				sessionAdmin.setSessionObject(request,giveroppfolging, giverOppfolgingKey);
+        			}
+        			if (komplikasjonsdiagnosergiver != null && !komplikasjonsdiagnosergiver.isEmpty()){
+        				Komplikasjonsdiagnosegiver komplikasjonsdiagnoseGiver = (Komplikasjonsdiagnosegiver)komplikasjonsdiagnosergiver.get(0);
+        				sessionAdmin.setSessionObject(request, komplikasjonsdiagnoseGiver,giverkomplikasjondiagnoseKey);
+        			}
         			sessionAdmin.setSessionObject(request, giverKomplikasjon,giverKey);
         			sessionAdmin.setSessionObject(request, lokalMelding, meldingsId);
         		} 			
