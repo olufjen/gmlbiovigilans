@@ -34,6 +34,10 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 	private String[] donasjonTabledefs;
 	private String selectgiverSQL;
 	private String[] giverTableDefs;
+	private String giveroppfolgingSQL;
+	private String[] giveroppfolgingTableDefs;
+	private String komplikasjonsdiagnosegiverSQL;
+	private String[] komplikasjonsdiagnosegiverTableDefs;
 	
 	
 	private String pasientKey = "pasientKomp"; // Nøkkel dersom melding er av type pasientkomplikasjon
@@ -41,6 +45,9 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 	private String andreKey = "annenKomp";
 	private String donasjonKey = "donasjonen";
 	private String giverenKey = "giver";
+	private String giverOppfolgingKey = "giveroppfolging";
+	private String giverkomplikasjondiagnoseKey = "giverkomplikasjondiagnose";
+	
 	
 	private String delMeldingKey = null;
 	
@@ -51,8 +58,38 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 	private GiverkomplikasjonSelect givermeldingSelect = null;
 	private DonasjonSelect donasjonSelect = null;
 	private GiverSelect giverSelect = null;
+	private GiveroppfolgingSelect giveroppfolgingSelect = null;
+	private KomplikasjonsdiagnoseGiverSelect giverkomplikasjonSelect = null;
+	
 	private Map alleMeldinger = null;
 
+	
+	public String getGiveroppfolgingSQL() {
+		return giveroppfolgingSQL;
+	}
+	public void setGiveroppfolgingSQL(String giveroppfolgingSQL) {
+		this.giveroppfolgingSQL = giveroppfolgingSQL;
+	}
+	public String[] getGiveroppfolgingTableDefs() {
+		return giveroppfolgingTableDefs;
+	}
+	public void setGiveroppfolgingTableDefs(String[] giveroppfolgingTableDefs) {
+		this.giveroppfolgingTableDefs = giveroppfolgingTableDefs;
+	}
+	public String getKomplikasjonsdiagnosegiverSQL() {
+		return komplikasjonsdiagnosegiverSQL;
+	}
+	public void setKomplikasjonsdiagnosegiverSQL(
+			String komplikasjonsdiagnosegiverSQL) {
+		this.komplikasjonsdiagnosegiverSQL = komplikasjonsdiagnosegiverSQL;
+	}
+	public String[] getKomplikasjonsdiagnosegiverTableDefs() {
+		return komplikasjonsdiagnosegiverTableDefs;
+	}
+	public void setKomplikasjonsdiagnosegiverTableDefs(
+			String[] komplikasjonsdiagnosegiverTableDefs) {
+		this.komplikasjonsdiagnosegiverTableDefs = komplikasjonsdiagnosegiverTableDefs;
+	}
 	
 	public String getSelectDonasjonSQL() {
 		return selectDonasjonSQL;
@@ -254,6 +291,12 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 					List givere = velgGiver(giverId,nType);
 					alleMeldinger.put(giverenKey,givere);
 				}
+				List giveroppfolginger = velgGiveroppfolging(mId, nType);
+				List komplikasjonsdiagnoser = velgkomplikasjonsdiagnoseGiver(mId, nType);
+				alleMeldinger.put(giverOppfolgingKey, giveroppfolginger);
+				alleMeldinger.put(giverkomplikasjondiagnoseKey, komplikasjonsdiagnoser);
+				
+				
 			}
 			
 		}
@@ -275,7 +318,7 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 	}
 	/**
 	 * velgGiver
-	 * Denne rutinen henter giver til engitt donasjon
+	 * Denne rutinen henter giver til en gitt donasjon
 	 * @param dId
 	 * @param nType
 	 * @return
@@ -286,4 +329,30 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 		List givere = giverSelect.execute(dId);
 		return givere;
 	}
+	/**
+	 * velgGiveroppfolging
+	 * Denne rutinen henter giveroppfolging til en gitt giverkomplikasjon
+	 * @param dId
+	 * @param nType
+	 * @return
+	 */
+	private List velgGiveroppfolging(Long dId, int nType){
+		giveroppfolgingSelect = new GiveroppfolgingSelect(getDataSource(),giveroppfolgingSQL,giveroppfolgingTableDefs);
+		giveroppfolgingSelect.declareParameter(new SqlParameter(nType));
+		List giveoppfolginger = giveroppfolgingSelect.execute(dId);
+		return giveoppfolginger;
+	}
+	/**
+	 * velgkomplikasjonsdiagnoseGiver
+	 * Denne rutinen henter komplikasjonsdiagnoser til en gitt giverkomplikasjon
+	 * @param dId
+	 * @param nType
+	 * @return
+	 */
+	private List velgkomplikasjonsdiagnoseGiver(Long dId, int nType){
+		giverkomplikasjonSelect = new KomplikasjonsdiagnoseGiverSelect(getDataSource(),komplikasjonsdiagnosegiverSQL,komplikasjonsdiagnosegiverTableDefs);
+		giverkomplikasjonSelect.declareParameter(new SqlParameter(nType));
+		List komplikasjonsdiagnoser = giverkomplikasjonSelect.execute(dId);
+		return komplikasjonsdiagnoser;
+	}	
 }	
