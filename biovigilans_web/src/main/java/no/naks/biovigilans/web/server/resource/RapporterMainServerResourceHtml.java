@@ -21,6 +21,11 @@ import org.restlet.resource.ClientResource;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 
+/**
+ * @author olj
+ *  Denne resursen er knyttet til siden rapporter_hendelse_main
+ *  Med denne siden velger melder hva slags type melding dette er.
+ */
 public class RapporterMainServerResourceHtml extends SessionServerResource {
 
 	public RapporterMainServerResourceHtml() {
