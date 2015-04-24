@@ -9,6 +9,12 @@ import no.naks.biovigilans.model.Giver;
 import no.naks.biovigilans.model.GiverImpl;
 import no.naks.rammeverk.kildelag.dao.AbstractSelect;
 
+/**
+ * GiverSelect
+ * Denne klassen gjør oppslag mot givere
+ * @author olj
+ *
+ */
 public class GiverSelect extends AbstractSelect {
 
 	public GiverSelect(DataSource dataSource, String sql, String[] tableDefs) {
