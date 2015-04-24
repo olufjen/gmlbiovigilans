@@ -4,10 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import no.naks.biovigilans.model.Annenkomplikasjon;
+import no.naks.biovigilans.model.Donasjon;
+import no.naks.biovigilans.model.Giver;
 import no.naks.biovigilans.model.Giverkomplikasjon;
 import no.naks.biovigilans.model.Pasientkomplikasjon;
 import no.naks.biovigilans.model.Vigilansmelding;
 import no.naks.biovigilans.felles.server.resource.SessionServerResource;
+
 import org.restlet.Request;
 import org.restlet.data.Form;
 import org.restlet.data.LocalReference;
@@ -27,7 +30,7 @@ import freemarker.template.SimpleScalar;
  * Dette er resource for rapporterte meldinger.
  * Den aktiveres når bruker velger oppfølgingsmelding og har angitt en meldingsnøkkel.
  * En oppfølgingsmelding identifiseres med bruk av en meldingsnøkkel.
- * 
+ * Den er knyttet til alle typer meldinger, Transfusjon, Giver eller andre meldinger
  * @author olj
  *
  */
@@ -127,6 +130,8 @@ public class RapporterteMeldingerServerResourceHTML extends
 	    annenKomplikasjon = (Annenkomplikasjon)sessionAdmin.getSessionObject(request, andreKey);
 	    pasientKomplikasjon = (Pasientkomplikasjon)sessionAdmin.getSessionObject(request, pasientKey);
 	    giverKomplikasjon = (Giverkomplikasjon)sessionAdmin.getSessionObject(request,  giverKey);
+	   
+	    Donasjon donasjon = (Donasjon) sessionAdmin.getSessionObject(request,  donasjonKey);
 	     Map<String, Object> dataModel = new HashMap<String, Object>();
 
 	     LocalReference pakke = LocalReference.createClapReference(LocalReference.CLAP_CLASS,
@@ -143,7 +148,9 @@ public class RapporterteMeldingerServerResourceHTML extends
 	    	 dataModel.put(andreKey,annenKomplikasjon);
 	     }
 	     if (giverKomplikasjon != null){
+	    	 Giver giver = (Giver)sessionAdmin.getSessionObject(request,  giverenKey);
 	    	 dataModel.put(giverKey,giverKomplikasjon);
+	    	 dataModel.put(giverenKey, giver);
 	    	 page = "/hemovigilans/rapportert_giver.html";
 	     }
 	     if (pasientKomplikasjon != null){
