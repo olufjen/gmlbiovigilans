@@ -34,6 +34,10 @@ import org.restlet.resource.Post;
 
 import freemarker.template.SimpleScalar;
 
+/**
+ * @author olj
+ *  Denne resursen er knyttet til siden for å rapportere andre hendelser
+ */
 public class RapporterAndreHendelserServerResourceHtml extends SessionServerResource {
 
 			
