@@ -47,6 +47,10 @@ import org.restlet.resource.Post;
 
 import freemarker.template.SimpleScalar;
 
+/**
+ * @author olj
+ *  Denne resursen er knyttet til kontaksiden. Her rapporterer man kontaktinformasjon
+ */
 public class RapporterKontaktServerResourceHtml extends SessionServerResource {
 	private String anonymEpost = "meldeordningen@kunnskapssenteret.no";
 	private String[] helseRegioner;
