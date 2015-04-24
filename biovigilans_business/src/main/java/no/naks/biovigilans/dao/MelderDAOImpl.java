@@ -10,6 +10,9 @@ import org.springframework.jdbc.core.SqlParameter;
 import no.naks.biovigilans.model.Donasjon;
 import no.naks.biovigilans.model.Giverkomplikasjon;
 import no.naks.biovigilans.model.Melder;
+import no.naks.biovigilans.model.Pasient;
+import no.naks.biovigilans.model.Pasientkomplikasjon;
+import no.naks.biovigilans.model.Transfusjon;
 import no.naks.biovigilans.model.Vigilansmelding;
 import no.naks.rammeverk.kildelag.dao.AbstractAdmintablesDAO;
 import no.naks.rammeverk.kildelag.dao.TablesUpdateImpl;
@@ -38,15 +41,29 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 	private String[] giveroppfolgingTableDefs;
 	private String komplikasjonsdiagnosegiverSQL;
 	private String[] komplikasjonsdiagnosegiverTableDefs;
-	
+	private String selecttransfusjonSQL;
+	private String[] transfusjonTableDefs;
+	private String selectPasientSQL;
+	private String[] pasientTableDefs;
+	private String selectSykdomSQL;
+	private String[] sykdomTableDefs;
 	
 	private String pasientKey = "pasientKomp"; // Nøkkel dersom melding er av type pasientkomplikasjon
 	private String giverKey = "giverkomp"; 	// Nøkkel dersom melding er at type giverkomplikasjon
 	private String andreKey = "annenKomp";
+/*
+ * Nøkler for giverkomplikasjoner	
+ */
 	private String donasjonKey = "donasjonen";
 	private String giverenKey = "giver";
 	private String giverOppfolgingKey = "giveroppfolging";
 	private String giverkomplikasjondiagnoseKey = "giverkomplikasjondiagnose";
+/*
+ * Nøkler for pasientkomplikasjoner	
+ */
+	private String pasientenKey = "pasienten";
+	private String transfusjonsKey = "transfusjon";
+	private String sykdomKey = "sykdom";
 	
 	
 	private String delMeldingKey = null;
@@ -60,9 +77,50 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 	private GiverSelect giverSelect = null;
 	private GiveroppfolgingSelect giveroppfolgingSelect = null;
 	private KomplikasjonsdiagnoseGiverSelect giverkomplikasjonSelect = null;
+	private TransfusjonSelect transfusjonSelect = null;
+	private PasientSelect pasientSelect = null;
+	private SykdomSelect sykdomSelect = null;
+	
 	
 	private Map alleMeldinger = null;
 
+	
+	public String getSelecttransfusjonSQL() {
+		return selecttransfusjonSQL;
+	}
+	public void setSelecttransfusjonSQL(String selecttransfusjonSQL) {
+		this.selecttransfusjonSQL = selecttransfusjonSQL;
+	}
+	public String[] getTransfusjonTableDefs() {
+		return transfusjonTableDefs;
+	}
+	public void setTransfusjonTableDefs(String[] transfusjonTableDefs) {
+		this.transfusjonTableDefs = transfusjonTableDefs;
+	}
+	public String getSelectPasientSQL() {
+		return selectPasientSQL;
+	}
+	public void setSelectPasientSQL(String selectPasientSQL) {
+		this.selectPasientSQL = selectPasientSQL;
+	}
+	public String[] getPasientTableDefs() {
+		return pasientTableDefs;
+	}
+	public void setPasientTableDefs(String[] pasientTableDefs) {
+		this.pasientTableDefs = pasientTableDefs;
+	}
+	public String getSelectSykdomSQL() {
+		return selectSykdomSQL;
+	}
+	public void setSelectSykdomSQL(String selectSykdomSQL) {
+		this.selectSykdomSQL = selectSykdomSQL;
+	}
+	public String[] getSykdomTableDefs() {
+		return sykdomTableDefs;
+	}
+	public void setSykdomTableDefs(String[] sykdomTableDefs) {
+		this.sykdomTableDefs = sykdomTableDefs;
+	}
 	
 	public String getGiveroppfolgingSQL() {
 		return giveroppfolgingSQL;
@@ -270,6 +328,26 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 			pasientmeldingSelect = new PasientkomplikasjonSelect(getDataSource(),selectpasientKomplikasjonSQL,pasientkomplikasjonTableDefs);
 			pasientmeldingSelect.declareParameter(new SqlParameter(nType));
 			delMeldinger = pasientmeldingSelect.execute(mId);
+			Pasientkomplikasjon pasientKomplikasjon  = null;
+			if (delMeldinger != null && !delMeldinger.isEmpty()){
+				pasientKomplikasjon = (Pasientkomplikasjon)delMeldinger.get(0);
+				Long tId = pasientKomplikasjon.getTransfusjonsId();
+				List transfusjoner = velgTransfusjon(tId, nType);
+				alleMeldinger.put(transfusjonsKey, transfusjoner);
+				Transfusjon transfusjon = null;
+				if(transfusjoner != null && !transfusjoner.isEmpty()){
+					transfusjon = (Transfusjon)transfusjoner.get(0);
+					Long pId = transfusjon.getPasient_Id();
+					List pasienter =  velgPasient(pId, nType);
+					alleMeldinger.put(pasientenKey,pasienter);
+					Pasient pasient = null;
+					if(pasienter != null && !pasienter.isEmpty()){
+						pasient = (Pasient)pasienter.get(0);
+						List sykdommer = velgSykdom(pId, nType);
+						alleMeldinger.put(sykdomKey,sykdommer);
+					}
+				}
+			}
 		}
 		if (delMeldinger.isEmpty()){
 			pasientmeldingSelect = null;
@@ -354,5 +432,44 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 		giverkomplikasjonSelect.declareParameter(new SqlParameter(nType));
 		List komplikasjonsdiagnoser = giverkomplikasjonSelect.execute(dId);
 		return komplikasjonsdiagnoser;
-	}	
+	}
+	/**
+	 * velgTransfusjon
+	 * Denne rutinen henter transfusjon til en gitt pasientkomplikasjon
+	 * @param dId
+	 * @param nType
+	 * @return
+	 */
+	private List velgTransfusjon(Long dId, int nType){
+		transfusjonSelect = new TransfusjonSelect(getDataSource(),selecttransfusjonSQL,transfusjonTableDefs);
+		transfusjonSelect.declareParameter(new SqlParameter(nType));
+		List transfusjoner = transfusjonSelect.execute(dId);
+		return transfusjoner;
+	}
+	/**
+	 * velgPasient
+	 * Denne rutinen henter pasient til en gitt transfusjon
+	 * @param dId
+	 * @param nType
+	 * @return
+	 */
+	private List velgPasient(Long dId, int nType){
+		pasientSelect = new PasientSelect(getDataSource(),selectPasientSQL,pasientTableDefs);
+		pasientSelect.declareParameter(new SqlParameter(nType));
+		List pasienter = pasientSelect.execute(dId);
+		return pasienter;
+	}
+	/**
+	 * velgSykdom
+	 * Denne rutinen henter sykdommer til en gitt pasient
+	 * @param dId
+	 * @param nType
+	 * @return
+	 */
+	private List velgSykdom(Long dId, int nType){
+		sykdomSelect = new SykdomSelect(getDataSource(),selectSykdomSQL,sykdomTableDefs);
+		sykdomSelect.declareParameter(new SqlParameter(nType));
+		List sykdommer = sykdomSelect.execute(dId);
+		return sykdommer;
+	}		
 }	
