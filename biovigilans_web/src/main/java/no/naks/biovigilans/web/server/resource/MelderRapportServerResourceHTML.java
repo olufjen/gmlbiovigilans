@@ -23,7 +23,8 @@ import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 
 /**
- * Denne resource henter frem alle meldinger knyttet til en melder
+ * Denne resource henter frem alle meldinger knyttet til en melder.
+ * Den er knyttet til siden melder_rapport
  * @author olj
  *
  */
