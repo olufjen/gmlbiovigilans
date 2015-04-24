@@ -3,12 +3,21 @@ package no.naks.biovigilans.web.server.resource;
 import java.util.HashMap;
 import java.util.Map;
 
+import no.naks.biovigilans.model.Donasjon;
+import no.naks.biovigilans.model.DonasjonImpl;
+import no.naks.biovigilans.model.Giver;
+import no.naks.biovigilans.model.GiverImpl;
+import no.naks.biovigilans.model.Giverkomplikasjon;
+import no.naks.biovigilans.model.GiverkomplikasjonImpl;
+import no.naks.biovigilans.model.Giveroppfolging;
+import no.naks.biovigilans.model.GiveroppfolgingImpl;
+import no.naks.biovigilans.model.Komplikasjonsdiagnosegiver;
+import no.naks.biovigilans.model.KomplikasjonsdiagnosegiverImpl;
 import no.naks.biovigilans.model.Vigilansmelding;
 import no.naks.biovigilans.felles.model.DonasjonwebModel;
 import no.naks.biovigilans.felles.model.GiverKomplikasjonwebModel;
 import no.naks.biovigilans.felles.model.KomDiagnosegiverwebModel;
 import no.naks.biovigilans.felles.model.MelderwebModel;
-
 import no.naks.biovigilans.felles.server.resource.SessionServerResource;
 
 import org.restlet.data.Form;
@@ -23,6 +32,10 @@ import org.restlet.resource.Post;
 
 import freemarker.template.SimpleScalar;
 
+/**
+ * @author olj
+ *  Denne resursen er knyttet til sieen for å rapportere giverhendelser 
+ */
 public class RapporterGiverServerResourceHtml extends SessionServerResource {
 
 	
@@ -35,6 +48,9 @@ public class RapporterGiverServerResourceHtml extends SessionServerResource {
 	 * getInnmelding
 	 * Denne rutinen henter inn nødvendige session objekter og  setter opp nettsiden for å ta i mot
 	 * en rapportert hendelse
+	 * @return
+	 */
+	/**
 	 * @return
 	 */
 	@Get
@@ -70,23 +86,89 @@ public class RapporterGiverServerResourceHtml extends SessionServerResource {
 	 //    giverModel.giveroppfolgingDistribute();
 	 //    donasjon.distributeTerms();
 	//     komDiagnosegiver.distributeTerms();
-
+	     
+	     Giver giver = giverModel.getGiver();
+	     Donasjon donasjonen = giverModel.getDonasjonen();
+	     Komplikasjonsdiagnosegiver komplikasjonsdiagnoseGiver = giverModel.getKomplikasjonsdiagnoseGiver();
+		 Giveroppfolging giveroppfolging = giverModel.getGiveroppfolging();
+		 giverKomplikasjon = (Giverkomplikasjon)giverModel.getGiverKomplikasjon();
 	     if (giverModel.getVigilansmelding().getMeldingsnokkel() != null){
 	    	 displayPart = "block";
 	    	 datePart = "none";
 	    	 Vigilansmelding melding = (Vigilansmelding)giverModel.getGiverKomplikasjon();
+	    	 giverModel.setVigilansmelding(melding);
+	    	 
+	    
 	    	 giverModel.setHendelseDato(melding.getDatoforhendelse());
 	    	 giverModel.setMeldingsNokkel(melding.getMeldingsnokkel());
+	    	 donasjon = (DonasjonwebModel) sessionAdmin.getSessionObject(getRequest(), donasjonId);
+	    	 giver = (Giver)sessionAdmin.getSessionObject(getRequest(),  giverenKey);
+	    	 donasjonen = (Donasjon) sessionAdmin.getSessionObject(getRequest(),  donasjonKey);
+	    	 giveroppfolging = (Giveroppfolging) sessionAdmin.getSessionObject(getRequest(),giverOppfolgingKey);
+	    	 komplikasjonsdiagnoseGiver = (Komplikasjonsdiagnosegiver)sessionAdmin.getSessionObject(getRequest(),giverkomplikasjondiagnoseKey);
+	    
 	
+	    	 
 	     }
+/*	   
+ * Alle model objekter som benyttes i html må settes med initielle verdier dersom
+ * dette er en ny melding
+ *   
+*/	     if (giver.getKjonn() == null){
+	    	
+	    	 giver.setKjonn("ukjent");
+	    	 giver.setAlder("ukjent");
+	    	 giver.setGivererfaring("ukjent");
+	    	 giver.setVekt(new Long(0));
+	    	 giver.setTidligerekomplikasjonforklaring("ukjent");
+	    	 giver.setTidligerekomlikasjonjanei("ukjent");
+	     }
+		if (donasjonen.getDonasjonssted() == null){
+			donasjonen.setDonasjonssted("ukjent");
+			donasjonen.setMaltidfortapping("ukjent");
+			donasjonen.setLokalisasjonvenepunksjon("ukjent");
+			donasjonen.setTappetype("ukjent");
+			donasjonen.setKomplisertvenepunksjon("ukjent");
+		}
+		if (giverKomplikasjon.getStedforkomplikasjon() == null){
+			
+			giverKomplikasjon.setTidfratappingtilkompliasjon("ukjent");
+			giverKomplikasjon.setStedforkomplikasjon("ukjent");
+			giverKomplikasjon.setVarighetkomplikasjon("ukjent");
+			giverKomplikasjon.setAlvorlighetsgrad("ukjent");
+			giverKomplikasjon.setKliniskresultat("ukjent");
+			giverKomplikasjon.setTilleggsopplysninger("ukjent");
+		}
+		if (komplikasjonsdiagnoseGiver.getLokalskadearm() == null){
+			
+			komplikasjonsdiagnoseGiver.setLokalskadearm("ukjent");
+			komplikasjonsdiagnoseGiver.setSystemiskbivirkning("ukjent");
+			komplikasjonsdiagnoseGiver.setLokalskadebeskrivelse("ukjent");
+			komplikasjonsdiagnoseGiver.setBivirkningbeskrivelse("ukjent");
+		}
+		if (giveroppfolging.getStrakstiltak() == null){
+		
+			giveroppfolging.setStrakstiltak("ukjent");
+			giveroppfolging.setVidereoppfolging("ukjent");
+			giveroppfolging.setGiveroppfolgingbeskrivelse("ukjent");
+		}
+		if (giverModel.getVigilansmelding().getKladd() == null){
+			giverModel.getVigilansmelding().setKladd("");
+		}
     	 SimpleScalar simple = new SimpleScalar(displayPart);
     	 SimpleScalar hendelseDate = new SimpleScalar(datePart);
+
+    	 dataModel.put(giverkomplikasjonKey, giverKomplikasjon);
+    	 dataModel.put(giverenKey, giver);
+     	 dataModel.put(donasjonKey, donasjonen);
     	 dataModel.put(displayKey, simple);
     	 dataModel.put(displaydateKey, hendelseDate);
 	     dataModel.put(giverkomplikasjonId, giverModel);
 	     dataModel.put(donasjonId, donasjon);
 	     dataModel.put(komDiagnosegiverId, komDiagnosegiver);
-	  //   dataModel.put(kvitteringGiverId,giverKvittering);
+	     
+    	 dataModel.put(giverOppfolgingKey,giveroppfolging);
+    	 dataModel.put(giverkomplikasjondiagnoseKey,komplikasjonsdiagnoseGiver);
 	     
 	     sessionAdmin.setSessionObject(getRequest(), giverModel,giverkomplikasjonId);
 	     sessionAdmin.setSessionObject(getRequest(), donasjon,donasjonId);
