@@ -4,20 +4,26 @@ import java.util.Date;
 import java.util.Map;
 
 import no.naks.biovigilans.model.AbstractVigilansmelding;
+import no.naks.biovigilans.model.Donasjon;
+import no.naks.biovigilans.model.DonasjonImpl;
 import no.naks.biovigilans.model.Giver;
 import no.naks.biovigilans.model.GiverImpl;
 import no.naks.biovigilans.model.Giverkomplikasjon;
 import no.naks.biovigilans.model.GiverkomplikasjonImpl;
 import no.naks.biovigilans.model.Giveroppfolging;
 import no.naks.biovigilans.model.GiveroppfolgingImpl;
+import no.naks.biovigilans.model.Komplikasjonsdiagnosegiver;
+import no.naks.biovigilans.model.KomplikasjonsdiagnosegiverImpl;
 import no.naks.biovigilans.model.Vigilansmelding;
 
 
 public class GiverKomplikasjonwebModel extends VigilansModel {
 	private Giver giver;
 	private Vigilansmelding vigilansmelding;
-	private Giverkomplikasjon giverKomplikasjon;
-	private Giveroppfolging giveroppfolging;
+	protected Giverkomplikasjon giverKomplikasjon;
+	protected Giveroppfolging giveroppfolging;
+	protected Donasjon donasjonen;
+	protected Komplikasjonsdiagnosegiver komplikasjonsdiagnoseGiver;
 	
 	private String[] reaksjonengruppe; 
 	private String[] utenforBlodbankengruppe;
@@ -36,9 +42,36 @@ public class GiverKomplikasjonwebModel extends VigilansModel {
 		vigilansmelding = (Vigilansmelding) giverKomplikasjon;
 		giveroppfolging = new GiveroppfolgingImpl();
 	//	giver.setGiverfieldMaps(userFields);
-		
+	    donasjonen = new DonasjonImpl();
+	    komplikasjonsdiagnoseGiver = new KomplikasjonsdiagnosegiverImpl();
 	}
-	
+
+
+
+	public Donasjon getDonasjonen() {
+		return donasjonen;
+	}
+
+
+
+	public void setDonasjonen(Donasjon donasjonen) {
+		this.donasjonen = donasjonen;
+	}
+
+
+
+	public Komplikasjonsdiagnosegiver getKomplikasjonsdiagnoseGiver() {
+		return komplikasjonsdiagnoseGiver;
+	}
+
+
+
+	public void setKomplikasjonsdiagnoseGiver(
+			Komplikasjonsdiagnosegiver komplikasjonsdiagnoseGiver) {
+		this.komplikasjonsdiagnoseGiver = komplikasjonsdiagnoseGiver;
+	}
+
+
 
 	public String[] getVarighetSkadegruppe() {
 		return varighetSkadegruppe;
