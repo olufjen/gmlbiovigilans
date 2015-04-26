@@ -94,6 +94,13 @@
   	${komplikasjondiagnosegiver.systemiskbivirkning},${komplikasjondiagnosegiver.annenreaksjon},${komplikasjondiagnosegiver.lokalskadebeskrivelse},
   	${komplikasjondiagnosegiver.bivirkningbeskrivelse},${komplikasjondiagnosegiver.annenreaksjonbeskrivelse},${komplikasjondiagnosegiver.kommentar},
   	${komplikasjondiagnosegiver.meldeid}"></property>
+  	<property name="selectPasientSQL" value="${pasient.select}"></property>
+  	<property name="selecttransfusjonSQL" value="${transfusjon.select}"></property>
+  	<property name="selectSykdomSQL" value="${sykdom.select}"></property>
+  	<property name="transfusjonTableDefs" value="${transfusjon.transfusjonsid},${transfusjon.transfusjondato},${transfusjon.hastegrad},${transfusjon.feiltranfudert},
+  	${transfusjon.indikasjon},${transfusjon.tidligerkomplikasjon},${transfusjon.pasient_id}"></property>
+  	<property name="pasientTableDefs" value="${pasient.pasient_id},${pasient.kjonn},${pasient.aldersgruppe},${pasient.inneliggendepoli},${pasient.avdeling}"></property>
+  	<property name="sykdomTableDefs" value="${sykdom.sykdomid},${sykdom.sykdomnavn},${sykdom.symptomer},${sykdom.diagnosekode},${sykdom.pasient_id}"></property>
   </bean>
   <bean id="komplikasjonsdiagnosegiverDAO" class="no.naks.biovigilans.dao.KomplikasjonsdiagnosegiverDAOImpl" >
   	<property name="jdbcTemplate" ref="jdbcTemplatebiovigilans"></property>
