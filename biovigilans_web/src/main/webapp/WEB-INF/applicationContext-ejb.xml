@@ -107,6 +107,10 @@
   	<property name="insertKomplikasjonsdiagnosegiverSQL" value="${komplikasjonsdiagnosegiver.insert}"></property>
   	<property name="komplikasjonsdiagnosegiverPrimaryKey" value="${primarykey.komplikasjonsdiagnosegiver}"></property>
   	<property name="komplikasjonsdiagnosegiverprimarykeyTableDefs" value="${primarykey.primarykey}"></property>
+  	<property name="komplikasjonSQL" value="${komplikasjonpasient.select}"></property>
+  	<property name="annenkomplikasjonSQL" value="${komplikasjonannen.select}"></property>
+  	<property name="komplikasjonTableDefs" value="${komplisjonklassifikasjon.klassifikasjonsid},${komplisjonklassifikasjon.klassifikasjon},
+  	${komplisjonklassifikasjon.klassifikasjonbeskrivelse},${komplisjonklassifikasjon.meldeidpasient},${komplisjonklassifikasjon.meldeidannen}"></property>
   </bean>
   <bean id="transfusjonDAO"  class="no.naks.biovigilans.dao.TransfusjonDAOImpl">
   	  	<property name="jdbcTemplate" ref="jdbcTemplatebiovigilans"></property>
