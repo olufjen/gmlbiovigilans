@@ -67,5 +67,10 @@ import no.naks.rammeverk.kildelag.dao.Tablesupdate;
 	public void setSelectSykdomSQL(String selectSykdomSQL);
 	public String[] getSykdomTableDefs();
 	public void setSykdomTableDefs(String[] sykdomTableDefs);
-	
+	public String getKomplikasjonSQL();
+	public void setKomplikasjonSQL(String komplikasjonSQL);
+	public String[] getKomplikasjonTableDefs();
+	public void setKomplikasjonTableDefs(String[] komplikasjonTableDefs);
+	public String getAnnenkomplikasjonSQL();
+	public void setAnnenkomplikasjonSQL(String annenkomplikasjonSQL);
 }
