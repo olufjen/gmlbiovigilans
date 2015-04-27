@@ -170,7 +170,7 @@ public class RapporterteMeldingerServerResourceHTML extends
 	}
 	  /**
      * storeHemovigilans
-     * Denne rutinen tar imot meldingsnøkkel fra bruker og henter frem meidngsinformasjon basert på 
+     * Denne rutinen tar imot meldingsnøkkel fra bruker og henter frem meldingsinformasjon basert på 
      * oppgitt meldingsnøkkel
      * @param form
      * @return
