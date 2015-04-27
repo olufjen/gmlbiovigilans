@@ -47,7 +47,10 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 	private String[] pasientTableDefs;
 	private String selectSykdomSQL;
 	private String[] sykdomTableDefs;
-	
+	private String komplikasjonSQL;
+	private String[]komplikasjonTableDefs;
+	private String annenkomplikasjonSQL;
+		
 	private String pasientKey = "pasientKomp"; // Nøkkel dersom melding er av type pasientkomplikasjon
 	private String giverKey = "giverkomp"; 	// Nøkkel dersom melding er at type giverkomplikasjon
 	private String andreKey = "annenKomp";
@@ -64,6 +67,7 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 	private String pasientenKey = "pasienten";
 	private String transfusjonsKey = "transfusjon";
 	private String sykdomKey = "sykdom";
+	private String klassifikasjonKey = "komplikasjonklassifikasjon";
 	
 	
 	private String delMeldingKey = null;
@@ -80,11 +84,29 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 	private TransfusjonSelect transfusjonSelect = null;
 	private PasientSelect pasientSelect = null;
 	private SykdomSelect sykdomSelect = null;
-	
+	private KomplikasjonklassifikasjonSelect komplikasjonklassifikasjonSelect = null;
 	
 	private Map alleMeldinger = null;
 
 	
+	public String getAnnenkomplikasjonSQL() {
+		return annenkomplikasjonSQL;
+	}
+	public void setAnnenkomplikasjonSQL(String annenkomplikasjonSQL) {
+		this.annenkomplikasjonSQL = annenkomplikasjonSQL;
+	}
+	public String getKomplikasjonSQL() {
+		return komplikasjonSQL;
+	}
+	public void setKomplikasjonSQL(String komplikasjonSQL) {
+		this.komplikasjonSQL = komplikasjonSQL;
+	}
+	public String[] getKomplikasjonTableDefs() {
+		return komplikasjonTableDefs;
+	}
+	public void setKomplikasjonTableDefs(String[] komplikasjonTableDefs) {
+		this.komplikasjonTableDefs = komplikasjonTableDefs;
+	}
 	public String getSelecttransfusjonSQL() {
 		return selecttransfusjonSQL;
 	}
@@ -347,6 +369,9 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 						alleMeldinger.put(sykdomKey,sykdommer);
 					}
 				}
+				List klassifikasjoner = velgKomplikasjonklassifikasjon(mId, nType,komplikasjonSQL);
+				alleMeldinger.put(klassifikasjonKey,klassifikasjoner);
+				
 			}
 		}
 		if (delMeldinger.isEmpty()){
@@ -471,5 +496,18 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 		sykdomSelect.declareParameter(new SqlParameter(nType));
 		List sykdommer = sykdomSelect.execute(dId);
 		return sykdommer;
-	}		
+	}	
+	/**
+	 * velgKomplikasjonklassifikasjon
+	 * Denne rutinen henter klassifikasjoner til en gitt pasientkomplikasjon eller annen komplikasjon
+	 * @param dId
+	 * @param nType
+	 * @return
+	 */
+	private List velgKomplikasjonklassifikasjon(Long dId, int nType,String sql){
+		komplikasjonklassifikasjonSelect = new KomplikasjonklassifikasjonSelect(getDataSource(),sql,komplikasjonTableDefs);
+		komplikasjonklassifikasjonSelect.declareParameter(new SqlParameter(nType));
+		List klassifikasjoner = komplikasjonklassifikasjonSelect.execute(dId);
+		return klassifikasjoner;
+	}
 }	
