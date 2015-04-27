@@ -14,10 +14,13 @@ import no.naks.biovigilans.model.HemolyseImpl;
 import no.naks.biovigilans.model.Komplikasjonsklassifikasjon;
 import no.naks.biovigilans.model.KomplikasjonsklassifikasjonImpl;
 import no.naks.biovigilans.model.Pasient;
+import no.naks.biovigilans.model.PasientImpl;
 import no.naks.biovigilans.model.Pasientkomplikasjon;
 import no.naks.biovigilans.model.PasientkomplikasjonImpl;
 import no.naks.biovigilans.model.Produktegenskap;
 import no.naks.biovigilans.model.ProduktegenskapImpl;
+import no.naks.biovigilans.model.Sykdom;
+import no.naks.biovigilans.model.SykdomImpl;
 import no.naks.biovigilans.model.Symptomer;
 import no.naks.biovigilans.model.SymptomerImpl;
 import no.naks.biovigilans.model.Tiltak;
@@ -48,6 +51,7 @@ public class TransfusjonWebModel extends VigilansModel {
 	private Produktegenskap tromboEgenskap;
 	private Produktegenskap plasmaEgenskap;
 	private Pasient pasient;
+	private Sykdom sykdom;
 	private Vigilansmelding vigilansmelding;
 	
 	private List<String>hemolyseParametre; // Nedtrekk Hemolyseparametre når hemelyseparametre er positive
@@ -71,6 +75,9 @@ public class TransfusjonWebModel extends VigilansModel {
 		hemoLyse = new HemolyseImpl();
 		produktEgenskap = new ProduktegenskapImpl("blod-erytrocytt");
 		tromboEgenskap = new ProduktegenskapImpl("blod-trombocytt");
+		pasient = new PasientImpl();
+		sykdom = new SykdomImpl();
+		
 		
 	}
 
