@@ -34,7 +34,7 @@ import freemarker.template.SimpleScalar;
 
 /**
  * @author olj
- *  Denne resursen er knyttet til sieen for å rapportere giverhendelser 
+ *  Denne resursen er knyttet til siden for å rapportere giverhendelser 
  */
 public class RapporterGiverServerResourceHtml extends SessionServerResource {
 
@@ -76,16 +76,7 @@ public class RapporterGiverServerResourceHtml extends SessionServerResource {
 	     ClientResource clres2 = new ClientResource(LocalReference.createClapReference(LocalReference.CLAP_CLASS,"/hemovigilans/rapporter_giver.html"));
 	    
 	     setTransfusjonsObjects(); // Setter opp alle session objekter
-	//   	 giverModel.setFormNames(sessionParams);
-    //	 donasjon.setFormNames(sessionParams);
-    // 	 komDiagnosegiver.setFormNames(sessionParams);
-    //	 giverKvittering.setFormNames(sessionParams);
-         
-	 //    giverModel.distributeTerms();
-	 //    giverModel.giverKomplikasjonDistribute();
-	 //    giverModel.giveroppfolgingDistribute();
-	 //    donasjon.distributeTerms();
-	//     komDiagnosegiver.distributeTerms();
+
 	     
 	     Giver giver = giverModel.getGiver();
 	     Donasjon donasjonen = giverModel.getDonasjonen();
