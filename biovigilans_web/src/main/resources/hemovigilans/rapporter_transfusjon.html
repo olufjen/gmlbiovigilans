@@ -384,6 +384,14 @@ function showtext(id,thetext){
  					<label>${pasientkomplikasjon.hendelseDato?date}</label>
  					</div>
 			</div>
+			
+		<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt kjønn</label>
+			<div>
+				<label>${pasienten.kjonn}</label>
+			</div>
+		</div>
+			
       <div class="form-group"> <!-- div pasient -->
         <label>Kjønn</label>
     	<div class="radio">
@@ -400,7 +408,12 @@ function showtext(id,thetext){
  <!--  
      
  -->  
-    
+ 	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt aldersgruppe</label>
+			<div>
+				<label>${pasienten.aldersGruppe}</label>
+			</div>
+	</div>   
     <div class="form-group">
   
       <label>Alder</label>
@@ -412,8 +425,18 @@ function showtext(id,thetext){
      		   </#list>   
     
      </select>
-  
+ 
     </div>
+<div class="form-group" style="display: ${display}">
+   	<table border=1 >
+  		<tr><th>Sykdommer oppgitt</th></tr>
+  			<#list sykdom as sykdom>
+  			<tr id="syklr"></td><td id="syk">${sykdom.sykdomnsnavn}</td></tr> 
+  			</#list>
+	</table> 
+ </div>
+ 
+
 
     <br/><br/>
    	<div class="form-group">
@@ -435,6 +458,8 @@ function showtext(id,thetext){
 -->       
     </div> 
  
+ 
+ 
 	<div class="form-group">
       <label>Annen Sykdom av betydning for komplikasjonen (diagnose)</label>
          <input type="text" name ="p-annen-sykdom" list="icd10gruppe"  class="form-control">
@@ -451,7 +476,14 @@ function showtext(id,thetext){
           <option name="p-antistoff-sykdom-1"></option>
           <option name="p-antistoff-sykdom-2"></option>
       </select>
--->       
+--> 
+ 	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt transfusjonskomplikasjoner</label>
+			<div>
+				<label>${transfusjon.tildigerKomplikasjon}</label>
+			</div>
+	</div> 
+      
     </div>
       <label>Tidligere transfusjonskomplikasjoner</label>
     <div class="radio">
@@ -589,6 +621,13 @@ function showtext(id,thetext){
 	      </label>
 	  </div>
 
+ 	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt Inneliggende/poliklinisk</label>
+			<div>
+				<label>${pasienten.inneliggendePoli}</label>
+			</div>
+	</div>  
+
     <label>Inneliggende/poliklinisk</label>
     <div class="radio">
       <label>
@@ -606,7 +645,13 @@ function showtext(id,thetext){
       </label>
   </div>
  <!--    <b>Avdeling inn her????</b>  -->
-	<br/>       
+	<br/>   
+		<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt Avdeling</label>
+			<div>
+				<label>${pasienten.avdeling}</label>
+			</div>
+	</div>     
     <div id="avdeling" class="form-group" >
         <label>Avdeling</label>
        	<input name ="p-avdeling-list" required="required" list="avdelinger" class="form-control">
@@ -629,10 +674,25 @@ function showtext(id,thetext){
 		<input type="time" name="transfusjon-time">
 	</div>
 	-->
+	
+	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt Transfusjonsdato</label>
+			<div>
+				<label>${transfusjon.transfusionDate}</label>
+			</div>
+	</div> 
 	<label>Transfusjondato </label>
 	<div class="form-group">
 		<input type="date" name="transfusjon-date" required="required" id="transfusjon-date">
 	</div>
+	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt Hastegrad</label>
+			<div>
+				<label>${transfusjon.hastegrad}</label>
+			</div>
+	</div> 
+	
+	
     <label>Hastegrad</label>
     <div class="radio">
       <label>
@@ -649,7 +709,12 @@ function showtext(id,thetext){
         <input type="radio" name="p-transfusjon-hg" required="required" id="p-transfusjon-hg-3" value="hastegrad-vetikke"/>Vet ikke
       </label>
     </div>
-  
+	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt Indikasjon for transfusjonen</label>
+			<div>
+				<label>${transfusjon.indikasjon}</label>
+			</div>
+	</div>  
   <div class="form-group">
          <label>Indikasjon for transfusjonen </label>
             	<input name ="p-antistoff-transfusjon" list="icd10gruppetrans" class="form-control">
@@ -667,6 +732,22 @@ function showtext(id,thetext){
     <div class="form-group"> <!-- start div Blodprodukt annetblodprodukt-->	
   	
     <label>Blodproduktenhet som mest sannsynlig er årsak til komplikasjonen</label>
+   <div class="form-group" style="display: ${display}">
+   	<table border=1 >
+  		<tr><th>Blodprodukt tidligere oppgitt som årsak</th><th>Tappetype</th></tr>
+  			<#list blodprodukt as blodprodukt>
+  			<tr id="blod"></td><td id="blodet">${blodprodukt.blodprodukt}</td><td id="tappetype">${blodprodukt.tappetype}</td></tr> 
+  			</#list>
+	</table> 
+ </div>
+ <div class="form-group" style="display: ${display}">
+   	<table border=1 >
+  		<tr><th>Produktegenskaper</th></tr>
+  			<#list produktegenskap as produktegenskap>
+  			<tr id="egen"></td><td id="egenskap">${produktegenskap.egenskapKode}</td></tr> 
+  			</#list>
+	</table> 
+ </div>
     <div class="checkbox">
       <label>
         <input type="radio" name="p-blod-erytrocytt" required="required" id="p-blod-erytrocytt"  value="blod-erytrocytt" 
@@ -1115,8 +1196,15 @@ function showtext(id,thetext){
     </div>
     
     <!-- Mistenkt årsak og underkategorier -->
-    
+    <div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt mistenkt årsak</label>
+			<div>
+				<label>${pasientKomp.klassifikasjon}</label>
+			</div>
+	</div> 
+
     <h4>Mistenkt årsak til transfusjonsreaksjon </h4>
+    
     <div class="radio">
       <label title="En AHTR oppstår innen 24 timer etter en transfusjon. Kliniske og/eller laboratoriemessige tegn på hemolyse er til stede. Se definisjonene for nærmere beskrivelse.">
         <input type="radio" name="p-komp-klassifikasjon"  id="p-komp-ahtr-1" value="ahtr-1"  title="En AHTR oppstår innen 24 timer etter en transfusjon. Kliniske og/eller laboratoriemessige tegn på hemolyse er til stede. Se definisjonene for nærmere beskrivelse."
@@ -2924,7 +3012,12 @@ Alle andre transfusjonsreaksjoner der hypotensjon kan være et symptom og underl
 	
     <div class="form-group" >
 		<h3>Alvorlighetsgrad</h3>
-
+    <div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt alvorlighetsgrad</label>
+			<div>
+				<label>${pasientKomp.alvorlighetsgrad}</label>
+			</div>
+	</div> 
 
 		<div class="radio">
 			<label title="Forbigående skade/ negativ helseeffekt som ikke krevde omfattende behandling. ">
@@ -2966,6 +3059,13 @@ og/eller
 	</div>
 	<div class="form-group" >
 		<h3>Endelig utfall av skaden</h3>
+		
+	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt utfall av skaden</label>
+			<div>
+				<label>${pasientKomp.kliniskresultat}</label>
+			</div>
+	</div> 
 		<div class="radio">
 			<label title="Ingen subjektive symptomer eller kliniske funn som følge av skaden/ full helbredelse.">
 				<input type="radio" name="klinisk-res"  id="full-helb" value="ingensekvele" title="Ingen subjektive symptomer eller kliniske funn som følge av skaden/ full helbredelse."/>
@@ -2997,6 +3097,12 @@ og/eller
 	</div>
 	<div class="form-group" >
 		<h3>Årsakssammenheng</h3>
+	<div class="form-group" style="display: ${display}">
+			<label>Tidligere oppgitt Årsakssammenheng</label>
+			<div>
+				<label>${pasientKomp.arsakssammenheng}</label>
+			</div>
+	</div> 
 		<div class="radio">
 			<label title="- når det er avgjørende bevis som ut over rimelig tvil viser at reaksjonen (bivirkningen) skyldes blod eller blodkomponenter. ">
 				<input type="radio" name="aarsaks"  id="utelukket" value="Sikker" title="- når det er avgjørende bevis som ut over rimelig tvil viser at reaksjonen (bivirkningen) skyldes blod eller blodkomponenter. "/>
@@ -3032,6 +3138,15 @@ Vurder om du skal melde denne."/>Utelukket
 	</div>
 <div class="form-group" >
 		<h3>Hvorfor skjedde denne komplikasjonen?</h3>
+			
+  <div class="form-group" style="display: ${display}">
+   	<table border=1 >
+  		<tr><th>Årsaker til denne komplikasjonen oppgitt</th></tr>
+  			<#list komplikasjonklassifikasjon as klassifikasjon>
+  			<tr id="klaslr"></td><td id="klas">${klassifikasjon.klassifikasjon}</td></tr> 
+  			</#list>
+	</table> 
+ </div>
 	<div class="checkbox"  >
     <label>
     	<input name="p-forholdpasient" type="checkbox" id="p-forholdpasient" required="required" value="forholdpasient" 
