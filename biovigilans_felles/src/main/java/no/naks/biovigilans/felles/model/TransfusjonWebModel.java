@@ -83,6 +83,30 @@ public class TransfusjonWebModel extends VigilansModel {
 
 
 
+	public Produktegenskap getProduktEgenskap() {
+		return produktEgenskap;
+	}
+
+
+
+	public void setProduktEgenskap(Produktegenskap produktEgenskap) {
+		this.produktEgenskap = produktEgenskap;
+	}
+
+
+
+	public Sykdom getSykdom() {
+		return sykdom;
+	}
+
+
+
+	public void setSykdom(Sykdom sykdom) {
+		this.sykdom = sykdom;
+	}
+
+
+
 	public Vigilansmelding getVigilansmelding() {
 		return vigilansmelding;
 	}
