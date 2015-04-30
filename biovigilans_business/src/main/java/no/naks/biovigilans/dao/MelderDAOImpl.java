@@ -1,17 +1,20 @@
 package no.naks.biovigilans.dao;
 
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.jdbc.core.SqlParameter;
 
+import no.naks.biovigilans.model.Blodprodukt;
 import no.naks.biovigilans.model.Donasjon;
 import no.naks.biovigilans.model.Giverkomplikasjon;
 import no.naks.biovigilans.model.Melder;
 import no.naks.biovigilans.model.Pasient;
 import no.naks.biovigilans.model.Pasientkomplikasjon;
+import no.naks.biovigilans.model.Produktegenskap;
 import no.naks.biovigilans.model.Transfusjon;
 import no.naks.biovigilans.model.Vigilansmelding;
 import no.naks.rammeverk.kildelag.dao.AbstractAdmintablesDAO;
@@ -50,6 +53,14 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 	private String komplikasjonSQL;
 	private String[]komplikasjonTableDefs;
 	private String annenkomplikasjonSQL;
+	
+	private String utredningSQL;
+	private String[] utredningTableDefs;
+	private String blodProduktSQL;
+	private String[] blodproduktTableDefs;
+	private String produktegenskapSQL;
+	private String[] produktegenskapTableDefs;
+	
 		
 	private String pasientKey = "pasientKomp"; // Nøkkel dersom melding er av type pasientkomplikasjon
 	private String giverKey = "giverkomp"; 	// Nøkkel dersom melding er at type giverkomplikasjon
@@ -68,7 +79,9 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 	private String transfusjonsKey = "transfusjon";
 	private String sykdomKey = "sykdom";
 	private String klassifikasjonKey = "komplikasjonklassifikasjon";
-	
+	private String utredningKey = "utredning";
+	private String blodproduktKey = "blodprodukt";
+	private String produktegenskapKey = "produktegenskap";
 	
 	private String delMeldingKey = null;
 	
@@ -85,9 +98,49 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 	private PasientSelect pasientSelect = null;
 	private SykdomSelect sykdomSelect = null;
 	private KomplikasjonklassifikasjonSelect komplikasjonklassifikasjonSelect = null;
+	private UtredningSelect utredningSelect = null;
+	private BlodproduktSelect blodproduktSelect = null;
+	private ProduktegenskapSelect produktegenskapSelect = null;
 	
 	private Map alleMeldinger = null;
 
+	
+	public String getUtredningSQL() {
+		return utredningSQL;
+	}
+	public void setUtredningSQL(String utredningSQL) {
+		this.utredningSQL = utredningSQL;
+	}
+	public String[] getUtredningTableDefs() {
+		return utredningTableDefs;
+	}
+	public void setUtredningTableDefs(String[] utredningTableDefs) {
+		this.utredningTableDefs = utredningTableDefs;
+	}
+	public String getBlodProduktSQL() {
+		return blodProduktSQL;
+	}
+	public void setBlodProduktSQL(String blodProduktSQL) {
+		this.blodProduktSQL = blodProduktSQL;
+	}
+	public String[] getBlodproduktTableDefs() {
+		return blodproduktTableDefs;
+	}
+	public void setBlodproduktTableDefs(String[] blodproduktTableDefs) {
+		this.blodproduktTableDefs = blodproduktTableDefs;
+	}
+	public String getProduktegenskapSQL() {
+		return produktegenskapSQL;
+	}
+	public void setProduktegenskapSQL(String produktegenskapSQL) {
+		this.produktegenskapSQL = produktegenskapSQL;
+	}
+	public String[] getProduktegenskapTableDefs() {
+		return produktegenskapTableDefs;
+	}
+	public void setProduktegenskapTableDefs(String[] produktegenskapTableDefs) {
+		this.produktegenskapTableDefs = produktegenskapTableDefs;
+	}
 	
 	public String getAnnenkomplikasjonSQL() {
 		return annenkomplikasjonSQL;
@@ -368,6 +421,20 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 						List sykdommer = velgSykdom(pId, nType);
 						alleMeldinger.put(sykdomKey,sykdommer);
 					}
+					List<Blodprodukt> blodprodukter = velgblodProdukter(tId, nType);
+					alleMeldinger.put(blodproduktKey, blodprodukter);
+					List utredninger = velgUtredning(mId, nType);
+					alleMeldinger.put(utredningKey, utredninger);
+					List produktEgenskaper = new ArrayList<Produktegenskap>();
+					if (blodprodukter != null && !blodprodukter.isEmpty()){
+						for (Blodprodukt blodProdukt :blodprodukter){
+							Long bId = blodProdukt.getBlodProduktId();
+							List egenskaper = velgproduktEgenskap(bId, nType);
+							produktEgenskaper.addAll(egenskaper);
+						}						
+					}
+				
+					alleMeldinger.put(produktegenskapKey, produktEgenskaper);
 				}
 				List klassifikasjoner = velgKomplikasjonklassifikasjon(mId, nType,komplikasjonSQL);
 				alleMeldinger.put(klassifikasjonKey,klassifikasjoner);
@@ -496,7 +563,47 @@ public class MelderDAOImpl extends AbstractAdmintablesDAO  implements MelderDAO 
 		sykdomSelect.declareParameter(new SqlParameter(nType));
 		List sykdommer = sykdomSelect.execute(dId);
 		return sykdommer;
-	}	
+	}
+	/**
+	 * velgUtredning
+	 * Denne rutinen henter utredninger til en gitt pasientkomplikasjon
+	 * Denne tabellen inneholder årsaksdetaljer knyttet til klasifikasjonen
+	 * @param dId
+	 * @param nType
+	 * @return
+	 */
+	private List velgUtredning(Long dId, int nType){
+		utredningSelect = new UtredningSelect(getDataSource(),utredningSQL,utredningTableDefs);
+		utredningSelect.declareParameter(new SqlParameter(nType));
+		List utredninger = utredningSelect.execute(dId);
+		return utredninger;
+	}
+	/**
+	 * velgblodProdukter
+	 * Denne rutinen henter blodprodukter til en gitt transfusjon
+	 * @param dId
+	 * @param nType
+	 * @return
+	 */
+	private List velgblodProdukter(Long dId, int nType){
+		blodproduktSelect = new BlodproduktSelect(getDataSource(),blodProduktSQL,blodproduktTableDefs);
+		blodproduktSelect.declareParameter(new SqlParameter(nType));
+		List blodprodukter = blodproduktSelect.execute(dId);
+		return blodprodukter;
+	}
+	/**
+	 * velgproduktEgenskap
+	 * Denne rutinen henter produktegenskaper til et gitt blodprodukt
+	 * @param dId
+	 * @param nType
+	 * @return
+	 */
+	private List velgproduktEgenskap(Long dId, int nType){
+		produktegenskapSelect = new ProduktegenskapSelect(getDataSource(),produktegenskapSQL,produktegenskapTableDefs);
+		produktegenskapSelect.declareParameter(new SqlParameter(nType));
+		List egenskaper = produktegenskapSelect.execute(dId);
+		return egenskaper;
+	}		
 	/**
 	 * velgKomplikasjonklassifikasjon
 	 * Denne rutinen henter klassifikasjoner til en gitt pasientkomplikasjon eller annen komplikasjon
