@@ -73,4 +73,17 @@ import no.naks.rammeverk.kildelag.dao.Tablesupdate;
 	public void setKomplikasjonTableDefs(String[] komplikasjonTableDefs);
 	public String getAnnenkomplikasjonSQL();
 	public void setAnnenkomplikasjonSQL(String annenkomplikasjonSQL);
+	public String getUtredningSQL();
+	public void setUtredningSQL(String utredningSQL);
+	public String[] getUtredningTableDefs();
+	public void setUtredningTableDefs(String[] utredningTableDefs);
+	public String getBlodProduktSQL();
+	public void setBlodProduktSQL(String blodProduktSQL);
+	public String[] getBlodproduktTableDefs();
+	public void setBlodproduktTableDefs(String[] blodproduktTableDefs);
+	public String getProduktegenskapSQL();
+	public void setProduktegenskapSQL(String produktegenskapSQL);
+	public String[] getProduktegenskapTableDefs();
+	public void setProduktegenskapTableDefs(String[] produktegenskapTableDefs);
+	
 }
