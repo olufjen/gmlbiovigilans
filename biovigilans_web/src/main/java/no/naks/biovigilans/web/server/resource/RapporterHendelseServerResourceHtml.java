@@ -13,10 +13,16 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.namespace.QName;
 
 
+
+
+
+
 import no.naks.biovigilans.felles.server.resource.SessionServerResource;
-
+import no.naks.biovigilans.model.Pasient;
+import no.naks.biovigilans.model.Pasientkomplikasjon;
+import no.naks.biovigilans.model.Sykdom;
+import no.naks.biovigilans.model.Transfusjon;
 import no.naks.biovigilans.model.Vigilansmelding;
-
 import no.naks.biovigilans.felles.control.SessionAdmin;
 import no.naks.biovigilans.felles.control.TableWebService;
 import no.naks.biovigilans.felles.model.MelderwebModel;
@@ -175,6 +181,11 @@ public class RapporterHendelseServerResourceHtml extends SessionServerResource {
   
 	     setTransfusjonsObjects(); // Setter opp alle session objekter
 	     Map<String, Object> dataModel = new HashMap<String, Object>();
+	     Pasient pasient = transfusjon.getPasient();
+	     Sykdom sykdom = transfusjon.getSykdom();
+	     Pasientkomplikasjon pasientKomplikasjon = transfusjon.getPasientKomplikasjon();
+	     Transfusjon pasientTransfusjon = transfusjon.getTransfusjon();
+	     
 	     if (transfusjon.getVigilansmelding().getMeldingsnokkel() != null){
 	    	 displayPart = "block";
 	    	 datePart = "none";
@@ -182,15 +193,31 @@ public class RapporterHendelseServerResourceHtml extends SessionServerResource {
 	    	 transfusjon.setHendelseDato(melding.getDatoforhendelse());
 	    	 result.setHendelseDato(melding.getDatoforhendelse());
 	    	 transfusjon.setMeldingsNokkel(melding.getMeldingsnokkel());
-	
+	    	 pasient = (Pasient)sessionAdmin.getSessionObject(request,pasientenKey);
+	    	 pasientTransfusjon = (Transfusjon)sessionAdmin.getSessionObject(request,transfusjonsKey);
+	    	 if (pasientTransfusjon.getTildigerKomplikasjon() == null){
+	    		 pasientTransfusjon.setTildigerKomplikasjon("Nei");
+	    	 }
+	    	 List sykdommer = (List)sessionAdmin.getSessionObject(request,sykdomKey);
+	    	 List klassifikasjoner = (List)sessionAdmin.getSessionObject(request,klassifikasjonKey);
+ 			 List utredninger = (List)sessionAdmin.getSessionObject(request,utredningKey);
+ 			 List blodprodukter = (List)sessionAdmin.getSessionObject(request,blodproduktKey);
+ 			 List egenskaper = (List)sessionAdmin.getSessionObject(request,produktegenskapKey);
+	    	 dataModel.put(sykdomKey, sykdommer);
+	    	 dataModel.put(klassifikasjonKey, klassifikasjoner);
+	    	 dataModel.put(utredningKey,utredninger);
+	    	 dataModel.put(blodproduktKey,blodprodukter);
+	    	 dataModel.put(produktegenskapKey,egenskaper);
+	    	 
 	     }
     	 SimpleScalar simple = new SimpleScalar(displayPart);
     	 SimpleScalar hendelseDate = new SimpleScalar(datePart);
     	 dataModel.put(displayKey, simple);
     	 dataModel.put(displaydateKey, hendelseDate);
+    	 dataModel.put(pasientenKey, pasient);
+    	 dataModel.put(transfusjonsKey, pasientTransfusjon);
+    	 dataModel.put(pasientKey,pasientKomplikasjon);
 
-	     
-	     
     	 result.setFormNames(sessionParams);
     	 transfusjon.setFormNames(sessionParams);
     	 transfusjon.setPlasmaEgenskaper(blodProdukt); // Setter plasma produkttyper
