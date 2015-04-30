@@ -10,7 +10,11 @@ import no.naks.biovigilans.model.Giver;
 import no.naks.biovigilans.model.Giverkomplikasjon;
 import no.naks.biovigilans.model.Giveroppfolging;
 import no.naks.biovigilans.model.Komplikasjonsdiagnosegiver;
+import no.naks.biovigilans.model.Komplikasjonsklassifikasjon;
+import no.naks.biovigilans.model.Pasient;
 import no.naks.biovigilans.model.Pasientkomplikasjon;
+import no.naks.biovigilans.model.Sykdom;
+import no.naks.biovigilans.model.Transfusjon;
 import no.naks.biovigilans.model.Vigilansmelding;
 import no.naks.biovigilans.felles.server.resource.SessionServerResource;
 
@@ -32,6 +36,7 @@ import freemarker.template.SimpleScalar;
  * @author olj
  *  Denne resursen er knyttet til startsiden for Hemovigilans. 
  *  Her velger bruker om det er en ny melding eller en oppfølgingsmelding
+ *  Ved oppfølgingsmeldinger hentes all informasjon om meldingen fra databasen og settes i sessionadmin
  */
 public class RapporterStartServerResourceHTML extends SessionServerResource {
 
@@ -196,6 +201,30 @@ public class RapporterStartServerResourceHTML extends SessionServerResource {
         			setMeldingsValues(lokalMelding, melding);
         			sessionAdmin.setSessionObject(request, lokalMelding, meldingsId);       			
         			sessionAdmin.setSessionObject(request, pasientKomplikasjon,pasientKey);
+        			Pasient pasient = null;
+          			Transfusjon transfusjon = null;
+        			Komplikasjonsklassifikasjon klassifikasjon = null;
+        			List pasienter = alleMeldinger.get(pasientenKey);
+        			List sykdommer = alleMeldinger.get(sykdomKey);
+        			List transfusjoner = alleMeldinger.get(transfusjonsKey);
+        			List klassifikasjoner = alleMeldinger.get(klassifikasjonKey);
+        			List utredninger = alleMeldinger.get(utredningKey);
+        			List blodprodukter = alleMeldinger.get(blodproduktKey);
+        			List egenskaper = alleMeldinger.get(produktegenskapKey);
+        			
+        			if (pasienter != null && !pasienter.isEmpty()){
+        				pasient = (Pasient)pasienter.get(0);
+        				sessionAdmin.setSessionObject(request, pasient,pasientenKey);
+        			}
+        			if (transfusjoner != null && !transfusjoner.isEmpty()){
+        				transfusjon = (Transfusjon)transfusjoner.get(0);
+        				sessionAdmin.setSessionObject(request, transfusjon,transfusjonsKey);
+        			}
+        			sessionAdmin.setSessionObject(request, sykdommer,sykdomKey);
+        			sessionAdmin.setSessionObject(request, klassifikasjoner,klassifikasjonKey);
+        			sessionAdmin.setSessionObject(request,utredninger, utredningKey);
+        			sessionAdmin.setSessionObject(request,blodprodukter, blodproduktKey);
+        			sessionAdmin.setSessionObject(request,egenskaper,produktegenskapKey);
         		} 			
     		}
  
