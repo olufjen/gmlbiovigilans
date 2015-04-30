@@ -101,16 +101,22 @@
   	${transfusjon.indikasjon},${transfusjon.tidligerkomplikasjon},${transfusjon.pasient_id}"></property>
   	<property name="pasientTableDefs" value="${pasient.pasient_id},${pasient.kjonn},${pasient.aldersgruppe},${pasient.inneliggendepoli},${pasient.avdeling}"></property>
   	<property name="sykdomTableDefs" value="${sykdom.sykdomid},${sykdom.sykdomnavn},${sykdom.symptomer},${sykdom.diagnosekode},${sykdom.pasient_id}"></property>
+   	<property name="komplikasjonSQL" value="${komplikasjonpasient.select}"></property>
+  	<property name="annenkomplikasjonSQL" value="${komplikasjonannen.select}"></property>
+  	<property name="komplikasjonTableDefs" value="${komplisjonklassifikasjon.klassifikasjonsid},${komplisjonklassifikasjon.klassifikasjon},
+  	${komplisjonklassifikasjon.klassifikasjonbeskrivelse},${komplisjonklassifikasjon.meldeidpasient},${komplisjonklassifikasjon.meldeidannen}"></property>
+    <property name="utredningSQL" value="${utredning.select}"></property>
+    <property name="utredningTableDefs" value="${utredning.utredningid},${utredning.klassifikasjon},${utredning.klassifikasjonsbeskrivelse},${utredning.meldeid}"></property>
+    <property name="blodProduktSQL" value="${blodprodukt.select}"></property>
+    <property name="blodproduktTableDefs" value="${blodprodukt.blodproduktid},${blodprodukt.tappetype},${blodprodukt.blodprodukt},${blodprodukt.suspensjon},${blodprodukt.transfusjonsid}"></property>
+    <property name="produktegenskapSQL" value="${produktegenskap.select}"></property>
+    <property name="produktegenskapTableDefs" value="${produktegenskap.produktegenskapid},${produktegenskap.egenskapkode},${produktegenskap.egenskapbeskrivelse},${produktegenskap.blodproduktid}"></property>
   </bean>
   <bean id="komplikasjonsdiagnosegiverDAO" class="no.naks.biovigilans.dao.KomplikasjonsdiagnosegiverDAOImpl" >
   	<property name="jdbcTemplate" ref="jdbcTemplatebiovigilans"></property>
   	<property name="insertKomplikasjonsdiagnosegiverSQL" value="${komplikasjonsdiagnosegiver.insert}"></property>
   	<property name="komplikasjonsdiagnosegiverPrimaryKey" value="${primarykey.komplikasjonsdiagnosegiver}"></property>
   	<property name="komplikasjonsdiagnosegiverprimarykeyTableDefs" value="${primarykey.primarykey}"></property>
-  	<property name="komplikasjonSQL" value="${komplikasjonpasient.select}"></property>
-  	<property name="annenkomplikasjonSQL" value="${komplikasjonannen.select}"></property>
-  	<property name="komplikasjonTableDefs" value="${komplisjonklassifikasjon.klassifikasjonsid},${komplisjonklassifikasjon.klassifikasjon},
-  	${komplisjonklassifikasjon.klassifikasjonbeskrivelse},${komplisjonklassifikasjon.meldeidpasient},${komplisjonklassifikasjon.meldeidannen}"></property>
   </bean>
   <bean id="transfusjonDAO"  class="no.naks.biovigilans.dao.TransfusjonDAOImpl">
   	  	<property name="jdbcTemplate" ref="jdbcTemplatebiovigilans"></property>
