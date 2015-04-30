@@ -53,7 +53,7 @@ public class SessionServerResource extends ProsedyreServerResource {
 	protected String[] blodProdukt; // Plasma blodprodukter for nedtrekk - plasma produkttyper
 	protected String[] hemolyseParametre;
 	protected String pasientkomplikasjonId = "pasientkomplikasjon"; 	// Benyttes som nøkkel til HTML-sider
-	protected String transfusjonId = "transfusjon";					// Benyttes som nøkkel til HTML-sider
+	protected String transfusjonId = "transfusjonwebID";					// Benyttes som nøkkel til HTML-sider
 	protected String kvitteringsId = "kvittering";					// Benyttes som nøkkel for kvitteringssiden
 	protected String kvitteringGiverId = "giverKvittering";
 	protected String giverkomplikasjonId="giverkomplikasjon"; 		// Benyttes som nøkkel for giverwebmodel
@@ -66,6 +66,17 @@ public class SessionServerResource extends ProsedyreServerResource {
 	protected String giverkomplikasjonKey = "giverkomplikasjonen"; 	// Benyttes som nøkkel for giverkomplikasjon
 	protected String giverOppfolgingKey = "giveroppfolging";
 	protected String giverkomplikasjondiagnoseKey = "giverkomplikasjondiagnose";
+
+/*
+ * Nøkler for pasientkomplikasjoner	
+ */
+	protected String pasientenKey = "pasienten";
+	protected String transfusjonsKey = "transfusjon";
+	protected String sykdomKey = "sykdom";
+	protected String klassifikasjonKey = "komplikasjonklassifikasjon";
+	protected String utredningKey = "utredning";
+	protected String blodproduktKey = "blodprodukt";
+	protected String produktegenskapKey = "produktegenskap";		
 /*
  * Til bruk for oppfølgingsmeldinger	
  */
